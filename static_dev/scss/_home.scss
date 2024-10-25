@@ -1,0 +1,293 @@
+/* Sección 1: Carrusel de Banner */
+#carouselBanner {
+    .carousel-inner {
+        img {
+            width: 100%;
+            height: 65vh;
+            /* Mantiene la altura al 65% del viewport */
+            object-fit: contain;
+            /* Asegura que la imagen se vea completa sin recortar */
+        }
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Oscurece un poco los controles */
+        border-radius: 50%;
+    }
+
+    /* Si es necesario ajustar para pantallas más pequeñas */
+    @media (max-width: 768px) {
+        .carousel-inner img {
+            height: 35vh;
+            /* Reduce la altura mínima en pantallas pequeñas */
+        }
+    }
+}
+
+.carousel-container {
+    max-width: 80%; // Ajusta este valor según el margen deseado
+    margin: 0 auto; // Centra el contenedor
+}
+
+
+/* Sección 2: Mision */
+.container-mision {
+    background-color: rgb(224, 224, 223);
+    display: flex;
+    padding-bottom: 1rem 0;
+    justify-content: center;
+    /* Centra horizontalmente el contenido */
+    align-items: center;
+    /* Centra verticalmente el contenido */
+    min-height: 25vh;
+    /* Establece una altura mínima para centrar verticalmente */
+
+    /* Ajustes de ancho para la columna */
+    .col-md-8 {
+        max-width: 100%;
+        /* Aumenta el ancho máximo de la columna al 80% del contenedor */
+    }
+
+    h5 {
+        font-size: 1.25rem;
+        /* Ajusta el tamaño de fuente si es necesario */
+        line-height: 1.5;
+        /* Ajusta el espacio entre líneas */
+        padding: 0 20px;
+        margin-top: 3rem;
+        /* Agrega un margen superior sobre el texto */
+        position: relative;
+        /* Para posicionar la línea decorativa */
+
+        /* Línea decorativa */
+        &::before {
+            content: "";
+            position: absolute;
+            top: -1rem;
+            /* Ajusta la distancia entre la línea y el texto */
+            left: 50%;
+            transform: translateX(-50%);
+            /* Centra la línea */
+            width: 60px;
+            /* Ajusta el largo de la línea según necesites */
+            height: 2px;
+            /* Grosor de la línea */
+            background-color: black;
+            /* Color de la línea */
+        }
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container-mision .col-md-8 {
+        max-width: 90%;
+        /* En pantallas pequeñas, ajusta a un 90% para mayor legibilidad */
+    }
+
+    .container-mision h5 {
+        padding: 0 15px;
+        /* Ajusta el padding lateral en pantallas pequeñas */
+    }
+}
+
+
+
+/* Contenedores generales */
+.container {
+    max-width: 1200px;
+    padding: 60px 15px;
+
+    /* Títulos generales dentro de los contenedores */
+    h2 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: $primary-color;
+        margin-bottom: 1.5rem;
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: $secondary-color;
+    }
+
+    /* Imágenes generales */
+    img {
+        border-radius: 8px;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+}
+
+/* Sección 3: Habitaciones */
+.cont-habitacion {
+    background-color: rgba(255, 255, 255, 0.05);
+    /* Slight shading */
+    box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
+    /* Sombra en los márgenes derecho e inferior */
+    padding: 1rem;
+    /* Padding inside the container */
+    margin-bottom: 1.5rem;
+    /* Space between containers */
+    // border-radius: 8px;
+    /* Rounded corners */
+
+    h3 {
+        font-size: 1.75rem;
+        font-weight: 500;
+        color: $primary-color;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        padding-left: 20px;
+
+        li {
+            font-size: 1rem;
+            color: $secondary-color;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    /* Carruseles */
+    .carousel-inner {
+        border-radius: 8px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: $primary-color;
+        border-radius: 50%;
+        background-size: 100%, 100%;
+        /* Fix for the icons not displaying correctly */
+    }
+}
+
+/* Sección 4: Espacios Compartidos */
+.cont-compartidos {
+    background-color: rgb(236, 236, 234);
+    padding: 2rem 0;
+    /* Margen interno superior e inferior */
+
+    /* Línea divisoria antes de la sección */
+    &::before,
+    &::after {
+        content: "";
+        display: block;
+        width: 80%;
+        /* Línea que ocupa el 80% del ancho de la pantalla */
+        height: 1px;
+        background-color: #ccc;
+        /* Color sutil para la línea divisoria */
+        margin: 0 auto;
+        /* Centra la línea */
+    }
+
+    /* Margen superior e inferior */
+    &::before {
+        margin-bottom: 2rem;
+        /* Margen entre la línea superior y el contenido */
+    }
+
+    &::after {
+        margin-top: 2rem;
+        /* Margen entre el contenido y la línea inferior */
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .col-md-2 {
+        flex: 0 1 18%;
+        margin-bottom: 1rem;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .col-md-2 {
+            flex: 0 1 45%;
+            margin-bottom: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .col-md-2 {
+            flex: 0 1 90%;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+/* Sección 5: Características del Alojamiento */
+.cont-caracteristicas {
+    .container {
+        h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: $primary-color;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+            color: $secondary-color;
+        }
+
+        img {
+            margin-bottom: 1rem;
+            border-radius: 6px;
+        }
+    }
+}
+
+/* Sección 6: Contacto */
+.contacto-section {
+    .btn-success {
+        background-color: $btn-success-bg;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+
+        &:hover {
+            background-color: $btn-success-hover-bg;
+        }
+    }
+}
+
+/* Sección 7: Mapa */
+.mapa-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+
+    .embed-responsive {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding-bottom: 30%; // Ajustado al 70% de 56.25%
+        overflow: hidden;
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    }
+}

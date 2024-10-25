@@ -1,0 +1,52 @@
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #ffffff;
+
+    .container-fluid {
+        justify-content: space-between;
+        margin: 0 auto;
+        /* Ajusta el margen para centrar */
+        max-width: 1200px;
+        /* Añade un max-width para mantener la navbar más compacta en pantallas grandes */
+    }
+
+    .navbar-brand {
+        background-color: #ffffff;
+        margin-left: 30px;
+
+        img {
+            max-width: 60px;
+            /* Ajusta el tamaño del logo según tu necesidad */
+            height: auto;
+        }
+    }
+
+    /* Estilos para el botón de hamburguesa */
+    .navbar-toggler {
+        margin-right: 35px;
+        /* Ajusta el margen a la derecha del botón */
+    }
+
+    /* Media Query para pantallas grandes */
+    @media (min-width: 992px) {
+        .navbar-nav .nav-link:last-child {
+            margin-right: 50px;
+            /* Aplica margen en tamaños mayores */
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .navbar-nav .nav-link:last-child {
+            margin-right: 50px;
+            /* Mantiene el margen en esta medida */
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .navbar-nav .nav-link:last-child {
+            margin-right: 50px;
+            /* Mantiene el margen en esta medida */
+        }
+    }
+
+}

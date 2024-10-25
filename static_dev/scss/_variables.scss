@@ -1,0 +1,40 @@
+// Variables globales
+$text-font: "Josefin Sans", sans-serif;
+$primary-color: #444;
+$secondary-color: #666;
+$background-color: #f9f9f9;
+$btn-success-bg: #25d366;
+$btn-success-hover-bg: #1ebe57;
+$link-color: #007bff;
+$link-hover-color: #0056b3;
+
+// Global Styles
+
+h5 {
+    font-family: $text-font;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+p {
+    font-family: $text-font;
+    color: $secondary-color;
+    line-height: 3;
+}
+
+body {
+    font-family: $text-font;
+    color: $primary-color;
+    background-color: $background-color;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover {
+        color: $link-hover-color;
+        text-decoration: underline;
+    }
+}
