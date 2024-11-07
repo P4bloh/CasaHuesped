@@ -1,52 +1,113 @@
 /* Estilos para la barra de navegación */
+/* Estilos para la barra de navegación */
 .navbar {
     background-color: #ffffff;
 
     .container-fluid {
         justify-content: space-between;
         margin: 0 auto;
-        /* Ajusta el margen para centrar */
         max-width: 1200px;
-        /* Añade un max-width para mantener la navbar más compacta en pantallas grandes */
     }
 
     .navbar-brand {
-        background-color: #ffffff;
         margin-left: 30px;
 
         img {
             max-width: 60px;
-            /* Ajusta el tamaño del logo según tu necesidad */
             height: auto;
         }
     }
 
-    /* Estilos para el botón de hamburguesa */
     .navbar-toggler {
         margin-right: 35px;
-        /* Ajusta el margen a la derecha del botón */
     }
 
-    /* Media Query para pantallas grandes */
+    .navbar-nav .nav-link {
+        color: #333;
+        padding: 10px 15px;
+        text-decoration: none;
+        /* Elimina la subrayado */
+
+        &:hover {
+            color: #000000;
+            text-decoration: none;
+            /* Asegura que no se subraye al hacer hover */
+        }
+    }
+
     @media (min-width: 992px) {
         .navbar-nav .nav-link:last-child {
             margin-right: 50px;
-            /* Aplica margen en tamaños mayores */
         }
     }
 
     @media (min-width: 1024px) {
         .navbar-nav .nav-link:last-child {
             margin-right: 50px;
-            /* Mantiene el margen en esta medida */
         }
     }
 
     @media (min-width: 1200px) {
         .navbar-nav .nav-link:last-child {
             margin-right: 50px;
-            /* Mantiene el margen en esta medida */
+        }
+    }
+}
+
+/* Estilos para el footer */
+.footer_container {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+
+    .texto-footer {
+        p {
+            margin: 0;
+
+            a {
+                color: #fff;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
     }
 
+    .list-unstyled {
+        li {
+            margin: 0 10px;
+
+            a {
+                color: #fff;
+
+                &:hover {
+                    color: #ddd;
+                }
+
+                i {
+                    transition: color 0.3s;
+                }
+            }
+        }
+    }
+
+    .text-center {
+        p {
+            margin: 0;
+        }
+    }
+
+    .text-md-end {
+        @media (min-width: 768px) {
+            text-align: end;
+        }
+    }
+
+    .text-md-start {
+        @media (min-width: 768px) {
+            text-align: start;
+        }
+    }
 }
