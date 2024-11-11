@@ -3,12 +3,12 @@
 
 {% block contenedor %}
 
-    
+
 <!-- Sección 1: Carrusel portada -->
 <div class="carousel-container">
-    <div id="carouselBanner" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselBanner" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item  active">
                 <img src="{% static 'img/banners/banner_casahuesped1.jpg' %}" class="d-block carousel-image specific-position" alt="Casa Huesped - Imagen 1">
             </div>
             <div class="carousel-item">
@@ -21,12 +21,10 @@
                 <img src="{% static 'img/banners/banner_casahuesped4.jpg' %}" class="d-block carousel-image" alt="Casa Huesped - Imagen 4">
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselBanner" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" href="#carouselBanner" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
+        <!-- Imagen fija sobre el carrusel -->
+        <div class="carousel-logo-container">
+            <img src="{% static 'img/banners/logo-banner.png' %}" class="carousel-logo" alt="Nombre del Hostel">
+        </div>    
     </div>
 </div>
 
@@ -35,21 +33,21 @@
 <div class="container-fluid my-5 container-mision mt-0 mb-0">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-8 text-center">
-            <h5>En Casa Huésped 53, buscamos brindar una experiencia de hospitalidad única, ofreciendo un refugio en el corazón histórico de La Plata. Fusionamos el encanto de una casona centenaria 
-                con el confort moderno, con espacios ideales para disfrutar momentos de descanso en un entorno que respira historia y naturaleza. Con atención personalizada y un ambiente acogedor, 
-                buscamos que cada visita se sienta como en casa.
+            <h5>En Casa Huésped 53, ofrecemos una experiencia de hospitalidad única en el corazón histórico de La Plata. Esta casa familiar, refaccionada por su propietario arquitecto, fusiona el encanto de una casona centenaria con el 
+                confort moderno, brindando espacios ideales para descansar en un entorno que respira historia y naturaleza. Con atención personalizada y un ambiente acogedor, hacemos que cada visita se sienta como en casa.
             </h5>
         </div>
     </div>
 </div>
 
-<!-- Sección 3: Habitaciones -->
-<div id="habitaciones" class="container my-5">
-    <h2 class="text-center mb-4">Nuestras Habitaciones</h2>
 
-    <div class="seccion-habitaciones">
-        <div class="row mb-5 cont-habitacion">
-            <!-- Habitación Rock -->
+<!-- Sección 3: Habitaciones -->
+<div id="habitaciones" class="container mb-3 no-margin-bottom">
+    <h2 class="text-center mb-4">Nuestras Habitaciones</h2>
+    <div class="seccion-habitaciones justify-content-center">
+
+        <!-- Habitación Rock -->
+        <div class="row mb-5 justify-content-center cont-habitacion">          
             <div class="col-md-6">
                 <div id="carouselRock" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -81,20 +79,25 @@
                 <h3>Habitación Rock</h3>
                 <ul>
                     <li>Cama doble</li>
-                    <li>2 Camas simples</li>
+                    <li>1 Camas simples</li>
                     <li>Set Té/Café</li>
                     <li>Pava electrica</li>
                     <li>escritorio c/ sillas</li>
                     <li>Baño en suite</li>
                     <li>Wifi</li>                
                 </ul>
+                <!-- Botón Consultar -->
+                <div class="btn-container">
+                <button class="btn-consultar">Consultar</button>
+                </div>
+                
             </div>
+
         </div>
 
-        <!-- Repite para cada habitación -->
-
-        <div class="row mb-5 cont-habitacion">
-            <!-- Habitación tango -->
+        
+        <!-- Habitación tango -->
+        <div class="row mb-5 justify-content-center cont-habitacion">
             <div class="col-md-6">
                 <div id="carouselTango" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -125,21 +128,26 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 hab-caracteristicas">
                 <h3>Habitación Tango</h3>
                 <ul>
                     <li>Cama doble</li>
+                    <li>2 Camas Simples</li>
                     <li>Set Té/Café</li>
                     <li>Pava electrica</li>
                     <li>escritorio c/ sillas</li>
                     <li>Baño privado</li>
                     <li>Wifi</li>       
                 </ul>
+                <!-- Botón Consultar -->
+                <div class="btn-container">
+                    <button class="btn-consultar">Consultar</button>
+                </div>
             </div>
         </div>
 
-        <div class="row mb-5 cont-habitacion">
-            <!-- Habitación Jazz -->
+        <!-- Habitación Jazz -->
+        <div class="row mb-5 justify-content-center cont-habitacion">        
             <div class="col-md-6">
                 <div id="carouselJazz" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -167,72 +175,29 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 hab-caracteristicas">
                 <h3>Habitación Jazz</h3>
                 <ul>
                     <li>Cama doble</li>
-                    <li>1 Cama simple</li>
                     <li>Set Té/Café</li>
                     <li>Pava electrica</li>
                     <li>escritorio c/ sillas</li>
                     <li>Baño en suite</li>
                     <li>Wifi</li>     
                 </ul>
+                <!-- Botón Consultar -->
+                <div class="btn-container">
+                    <button class="btn-consultar">Consultar</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<!-- Sección 4: Espacios Compartidos -->
-<div id="espacios-compartidos" class="container-fluid my-5 cont-compartidos">
-    <h2 class="text-center mb-4">Espacios Compartidos</h2>
-    <div id="carouselEspaciosCompartidos" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <img src="{% static 'img/espacio_comun/living1.jpg' %}" class="d-block w-100 img-fluid" alt="Espacio Común">
-                    </div>
-                    <div class="col-md-4">
-                        <img src="{% static 'img/espacio_comun/living2.jpg' %}" class="d-block w-100 img-fluid" alt="Espacio Común">
-                    </div>
-                    <div class="col-md-4">
-                        <img src="{% static 'img/espacio_comun/living3.jpg' %}" class="d-block w-100 img-fluid" alt="Espacio Común">
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <img src="{% static 'img/espacio_comun/living4.jpg' %}" class="d-block w-100 img-fluid" alt="Espacio Común">
-                    </div>
-                    <div class="col-md-4">
-                        <img src="{% static 'img/espacio_comun/living5.jpg' %}" class="d-block w-100 img-fluid" alt="Espacio Común">
-                    </div>
-                    <div class="col-md-4">
-                        <img src="{% static 'img/espacio_comun/living6.jpg' %}" class="d-block w-100 img-fluid" alt="Espacio Común">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselEspaciosCompartidos" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselEspaciosCompartidos" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
-</div>
-
-<!-- Sección 5: Características del Alojamiento -->
-<div id="caracteristicas" class="container my-5 cont-caracteristicas">
-    <h2 class="text-center mb-4">Características del Alojamiento</h2>
-
-    <!-- Contenedor Iconos características -->
-    <div id="feature-icons" class="row mb-5">
+<!-- Contenedor Iconos características -->
+<div class="container-fluid my-5">
+    <div id="feature-icons" class="row justify-content-center mb-5">
         <div class="col-md-4 mb-4">
             <div class="feature-container d-flex align-items-center">
                 <img src="{% static 'img/logos/wifi.png' %}" alt="Wi-Fi" class="icon">
@@ -260,7 +225,7 @@
         <div class="col-md-4 mb-4">
             <div class="feature-container d-flex align-items-center">
                 <img src="{% static 'img/logos/baños.png' %}" alt="Baños" class="icon">
-                <p class="ms-3">Baños privados</p>
+                <p class="ms-3">Baños privados y en suite</p>
             </div>
         </div>
         <div class="col-md-4 mb-4">
@@ -270,44 +235,24 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Carruseles de Espacios -->
-    <div class="row mb-5 cont-habitacion">
+<!-- Sección 4: Espacios Compartidos -->
+<div id="caracteristicas" class="container my-5 cont-caracteristicas">
+    <h2 class="text-center mb-4">Espacios Compartidos</h2>
+    <div class="row">
+        <!-- Carrusel de Patio -->
         <div class="col-md-6 mb-4">
-            <div id="carouselEspacioPrivado" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselPatio" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="{% static 'img/habitaciones/jazz/jazz1.jpg' %}" class="d-block w-100" alt="Espacio Privado 1">
+                        <img src="{% static 'img/patio/patio1.jpg' %}" class="d-block w-100" alt="Patio 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/habitaciones/rock/rock1.jpg' %}" class="d-block w-100" alt="Espacio Privado 2">
+                        <img src="{% static 'img/patio/patio2.jpg' %}" class="d-block w-100" alt="Patio 2">
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/habitaciones/tango/tango1.jpg' %}" class="d-block w-100" alt="Espacio Privado 3">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselEspacioPrivado" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </a>
-                <a class="carousel-control-next" href="#carouselEspacioPrivado" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </a>
-            </div>
-            <h4 class="text-center mt-3">Espacio Privado</h4>
-            <p class="descripcion-espacio text-center">Disfruta de habitaciones cómodas y privadas.</p>
-        </div>
-
-        <div class="col-md-6 mb-4">
-            <div id="carouselPatio" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{% static 'img/patio/patio2.jpg' %}" class="d-block w-100" alt="Patio 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{% static 'img/patio/patio3.jpg' %}" class="d-block w-100" alt="Patio 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{% static 'img/patio/patio4.jpg' %}" class="d-block w-100" alt="Patio 3">
+                        <img src="{% static 'img/patio/patio3.jpg' %}" class="d-block w-100" alt="Patio 3">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselPatio" role="button" data-bs-slide="prev">
@@ -318,11 +263,12 @@
                 </a>
             </div>
             <h4 class="text-center mt-3">Patio</h4>
-            <p class="descripcion-espacio text-center">Disfruta de un tranquilo patio verde en el corazón de la ciudad, ideal para relajarse y compartir momentos en su zona al aire libre y galería. Además, cuenta con barbacoa.</p>
+            <p class="descripcion-espacio text-center">Disfruta de un tranquilo patio verde en el corazón de la ciudad, ideal para relajarse y compartir momentos en su zona al aire libre y galería.</p>
         </div>
 
+        <!-- Carrusel de Cocina -->
         <div class="col-md-6 mb-4">
-            <div id="carouselCocina" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselCocina" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="{% static 'img/cocina/cocina1.jpg' %}" class="d-block w-100" alt="Cocina 1">
@@ -345,46 +291,58 @@
             <p class="descripcion-espacio text-center">Cocina totalmente equipada disponible para nuestros huéspedes.</p>
         </div>
 
+        <!-- Carrusel de Living -->
         <div class="col-md-6 mb-4">
-            <div id="carouselUbicacion" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselLiving" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="{% static 'img/calle/calle1.jpg' %}" class="d-block w-100" alt="Ubicación 1">
+                        <img src="{% static 'img/living/living1.jpg' %}" class="d-block w-100" alt="Living 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/calle/calle2.jpg' %}" class="d-block w-100" alt="Ubicación 2">
+                        <img src="{% static 'img/living/living2.jpg' %}" class="d-block w-100" alt="Living 2">
                     </div>
                     <div class="carousel-item">
-                        <img src="{% static 'img/calle/calle3.jpg' %}" class="d-block w-100" alt="Ubicación 3">
+                        <img src="{% static 'img/living/living3.jpg' %}" class="d-block w-100" alt="Living 3">
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselUbicacion" role="button" data-bs-slide="prev">
+                <a class="carousel-control-prev" href="#carouselLiving" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 </a>
-                <a class="carousel-control-next" href="#carouselUbicacion" role="button" data-bs-slide="next">
+                <a class="carousel-control-next" href="#carouselLiving" role="button" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 </a>
             </div>
-            <h4 class="text-center mt-3">Ubicación</h4>
-            <p class="descripcion-espacio text-center">En el corazón de la ciudad, cerca de todas las atracciones.</p>
+            <h4 class="text-center mt-3">Living</h4>
+            <p class="descripcion-espacio text-center">Nuestros amplios espacios compartidos combinan el encanto de una casona antigua con un diseño arquitectónico moderno. Son el lugar ideal para relajarse y disfrutar de momentos compartidos en un entorno que une historia y estilo contemporáneo.</p>
+        </div>
+
+        <!-- Carrusel de Barrio -->
+        <div class="col-md-6 mb-4">
+            <div id="carouselBarrio" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'img/living/living1.jpg' %}" class="d-block w-100" alt="Living 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/living/living2.jpg' %}" class="d-block w-100" alt="Living 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/living/living3.jpg' %}" class="d-block w-100" alt="Living 3">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselBarrio" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselBarrio" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+            <h4 class="text-center mt-3">Barrio</h4>
+            <p class="descripcion-espacio text-center">Nuestros amplios espacios compartidos combinan el encanto de una casona antigua con un diseño arquitectónico moderno. Son el lugar ideal para relajarse y disfrutar de momentos compartidos en un entorno que une historia y estilo contemporáneo.</p>
         </div>
     </div>
 </div>
 
-    
 
-<!-- Sección 6: Mapa -->
-<div id="ubicacion" class="container-fluid my-5 mapa-section">
-    <h2 class="text-center mb-4">Ubicación</h2>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" 
-                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d817.8024999864263!2d-57.95921873037255!3d-34.926269898744685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDU1JzM0LjYiUyA1N8KwNTcnMzAuOSJX!5e0!3m2!1ses-419!2sar!4v1730412350663!5m2!1ses-419!2sar" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
-</div>
 
 {% endblock %}

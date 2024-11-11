@@ -19,6 +19,7 @@
             <a class="navbar-brand" href="#">
                 <img src="{% static 'img/logos/logo_casahuesped.png' %}" alt="Logo Casa Huesped">
             </a>
+
             <!-- Botón para el menú colapsable -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,7 +30,7 @@
                     <a class="nav-link" href="#habitaciones">Habitaciones</a>
                     <a class="nav-link" href="#espacios-compartidos">Espacios Compartidos</a>
                     <a class="nav-link" href="#caracteristicas">Caracteristicas</a>
-                    <a class="nav-link" href="#ubicacion">Caracteristicas</a>
+                    <a class="nav-link" href="#ubicacion">Ubicacion</a>
                     <a class="nav-link" href="#contacto">Contacto</a>
                 </div>
             </div>
@@ -44,25 +45,32 @@
     {% block tienda %} {% endblock %}
 
     <!-- Footer -->
-    <footer id="contacto" class="container-fluid footer_container">
-        <div class="container">
+    <footer id="contacto" class="container-fluid seccion-container">
+        <div class="container container-footer">
             <div class="row align-items-center">
-                <div class="col-12 text-center texto-footer">
-                    <p>Teléfono: <a href="tel:+123456789" class="text">+123456789</a></p>
-                    <p>Correo electrónico: <a href="mailto:info@fundacionbiosfera.com" class="text">info@casahuseped.com</a></p>
+                <div class="col-md-6 texto-footer">
+                    <h2>Contacto</h2>
+                    <p>Teléfono: <a href="tel:+123456789" class="text" aria-label="Teléfono: +123456789">+123456789</a></p>
+                    <p>Correo electrónico: <a href="mailto:info@fundacionbiosfera.com" class="text" aria-label="Correo electrónico: info@casahuseped.com">info@casahuseped.com</a></p>
                     <p>Dirección: 51 n###, La Plata</p>
+                </div>
+                <div class="col-md-6 mapa-footer">
+                    <div id="ubicacion" class="container my-5 mapa-section">
+                        <div class="embed-responsive">
+                            <iframe class="embed-responsive-item" 
+                                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d817.8024999864263!2d-57.95921873037255!3d-34.926269898744685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDU1JzM0LjYiUyA1N8KwNTcnMzAuOSJX!5e0!3m2!1ses-419!2sar!4v1730412350663!5m2!1ses-419!2sar" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row align-items-center mt-3">
-                <div class="col-md-6 text-center text-md-start">
-                    <p>Casa Huesped © 2023</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <ul class="list-unstyled d-flex mb-0 justify-content-center justify-content-md-end align-items-center">
-                        <li class="ms-3"><a class="text-white" href="#"><i class="fab fa-whatsapp fa-2x"></i></a></li>
-                        <li class="ms-3"><a class="text-white" href="#"><i class="fab fa-facebook-f fa-2x"></i></a></li>
-                        <li class="ms-3"><a class="text-white" href="#"><i class="fab fa-instagram fa-2x"></i></a></li>
-                    </ul>
+                <div class="col-md-12 text-center text-md-start">
+                    <p>Casa Huesped © 2024</p>
                 </div>
             </div>
         </div>
