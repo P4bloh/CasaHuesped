@@ -22,6 +22,8 @@
 
         .carousel-item {
             position: relative;
+            transition: transform 1.2s ease-in-out; // Ajusta la duración de la transición
+
         }
 
         .carousel-item img {
@@ -30,11 +32,6 @@
         }
     }
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-    }
 
     @media (max-width: 768px) {
         .carousel-inner img {
@@ -46,6 +43,55 @@
 .carousel-container {
     max-width: 90%;
     margin: 0 auto;
+    position: relative;
+
+    .carousel-logo-container {
+        position: absolute;
+        top: 80px; // Ajusta según sea necesario
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        width: 50%; // Ajusta el tamaño según sea necesario
+        max-width: 600px; // Tamaño máximo
+    }
+
+    .carousel-logo {
+        width: 100%; // Ajusta el tamaño según sea necesario
+    }
+}
+
+@media (max-width: 1400px) {
+    .carousel-container .carousel-logo-container {
+        width: 100%; // Ajusta el tamaño según sea necesario
+        max-width: 490px; // Tamaño máximo
+        top: 45px; // Ajusta según sea necesario
+
+    }
+}
+
+@media (max-width: 1200px) {
+    .carousel-container .carousel-logo-container {
+        width: 100%; // Ajusta el tamaño según sea necesario
+        max-width: 490px; // Tamaño máximo
+        top: 55px; // Ajusta según sea necesario
+
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container .carousel-logo-container {
+        width: 50%; // Ajusta el tamaño según sea necesario
+        max-width: 265px; // Tamaño máximo
+        top: 30px; // Ajusta según sea necesario
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-container .carousel-logo-container {
+        width: 80%; // Ajusta el tamaño según sea necesario
+        max-width: 250px; // Tamaño máximo
+        top: 30px; // Ajusta según sea necesario
+    }
 }
 
 /* Sección 2: Mision */
@@ -62,7 +108,7 @@
     }
 
     h5 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         line-height: 1.5;
         padding: 0 20px;
         margin-top: 3rem;
@@ -91,6 +137,7 @@
     }
 }
 
+
 /* Contenedores generales */
 .container {
     max-width: 1200px;
@@ -117,131 +164,184 @@
 }
 
 /* Sección 3: Habitaciones */
-.seccion-habitaciones {
-    margin-right: 30px;
+#habitaciones.no-margin-bottom {
+    margin-bottom: 2px;
+    padding-bottom: 5px;
 
-    .cont-habitacion {
-        background-color: rgba(255, 255, 255, 0.05);
-        box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        /* Reduce el tamaño del contenedor en 30px del lado derecho */
+    .seccion-habitaciones {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
 
-        //max-width: 90%;
-        /* Reduce el tamaño del contenedor a un 70% del ancho total */
-        //margin-left: auto;
-        //margin-right: auto;
+        .cont-habitacion {
+            background-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            max-width: 90%;
+            position: relative;
 
-        h3 {
-            font-size: 1.75rem;
-            font-weight: 500;
-            color: $primary-color;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
 
-        ul {
-            padding-left: 20px;
+            h3 {
+                font-size: 1.75rem;
+                font-weight: 500;
+                color: $primary-color;
+                margin-top: 1.5rem;
+                margin-bottom: 1rem;
+            }
 
-            li {
+            ul {
+                padding-left: 20px;
+
+                li {
+                    font-size: 1rem;
+                    color: $secondary-color;
+                    margin-bottom: 0.5rem;
+                }
+            }
+
+            .btn-consultar {
+                position: absolute;
+                bottom: 25px; // Ajusta según sea necesario
+                right: 45px; // Ajusta según sea necesario
+                padding: 10px 20px;
+                background-color: $primary-color; // Ajusta el color según tu diseño
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
                 font-size: 1rem;
-                color: $secondary-color;
-                margin-bottom: 0.5rem;
             }
-        }
 
-        .carousel-inner {
-            border-radius: 8px;
-        }
+            .carousel-inner {
+                border-radius: 8px;
+            }
 
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            background-color: $primary-color;
-            border-radius: 50%;
-            background-size: 100%, 100%;
-        }
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                background-color: $primary-color;
+                border-radius: 50%;
+                background-size: 100%, 100%;
+            }
 
-        .hab-caracteristicas {
-            flex: 0 0 40%;
-            /* Ajusta el tamaño de la columna derecha */
-            max-width: 40%;
-            /* Asegura que la columna no exceda el 40% del contenedor */
-        }
+            .hab-caracteristicas {
+                flex: 0 0 40%;
+                /* Ajusta el tamaño de la columna derecha */
+                max-width: 30%;
+                /* Asegura que la columna no exceda el 40% del contenedor */
+                margin-left: 40px;
+                border-radius: 15px;
+                padding-bottom: 1px;
+            }
 
-        @media (max-width: 768px) {
-            .col-md-6 {
-                flex: 0 0 100%;
-                max-width: 100%;
+            @media (max-width: 768px) {
+                .col-md-6 {
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
             }
         }
     }
 }
 
+/* Contendero iconos caracteristicas */
 
-/* Sección 4: Espacios Compartidos */
-.cont-compartidos {
-    background-color: rgb(236, 236, 234);
-    padding: 2rem 0;
+#feature-icons .col-md-4 {
+    flex: 0 0 28%;
+    /* Ajusta el ancho de las columnas */
+    max-width: 28%;
+    /* Ajusta el ancho máximo de las columnas */
+    margin-bottom: 1rem;
+    /* Ajusta el margen inferior según tus necesidades */
+    padding-left: 5px;
+    /* Ajusta el margen izquierdo */
+    padding-right: 5px;
+    /* Ajusta el margen derecho */
+}
 
-    &::before,
-    &::after {
-        content: "";
-        display: block;
+.feature-container {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    /* Ajusta el ancho del contenedor */
+    margin: 0 auto;
+
+    .icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    p {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: $secondary-color;
+        margin: 0;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 992px) {
+    #feature-icons .col-md-4 {
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
+
+    .feature-container {
         width: 80%;
-        height: 1px;
-        background-color: #ccc;
-        margin: 0 auto;
-    }
-
-    &::before {
-        margin-bottom: 2rem;
-    }
-
-    &::after {
-        margin-top: 2rem;
-    }
-
-    .carousel-inner {
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-
-        .col-md-3 {
-            flex: 0 1 23%;
-            margin-bottom: 1rem;
-        }
-
-        img {
-            width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .carousel-inner .col-md-3 {
-            flex: 0 1 45%;
-            margin-bottom: 1rem;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .carousel-inner .col-md-3 {
-            flex: 0 1 90%;
-            margin-bottom: 1rem;
-        }
-    }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
     }
 }
 
-/* Sección 5: Características del Alojamiento */
+@media (max-width: 768px) {
+    #feature-icons .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .feature-container {
+        width: 60%;
+        flex-direction: column;
+        text-align: center;
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-left: 0;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .feature-container {
+        padding: 0.5rem;
+        width: 60%;
+
+        .icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+
+
+
+/* Sección 5: Espacios Compartidos */
 .cont-caracteristicas {
     .container {
         h4 {
@@ -257,38 +357,22 @@
             color: $secondary-color;
         }
 
-        img {
-            margin-bottom: 1rem;
-            border-radius: 6px;
+        .carousel-inner {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+
+            img {
+                margin-bottom: 1rem;
+                border-radius: 6px;
+                object-fit: cover;
+                height: 400px;
+                width: 100%;
+            }
         }
 
         .row {
             margin-bottom: 2rem;
-        }
-    }
-
-    .feature-container {
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 1rem;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 80%;
-        margin: 0 auto;
-
-        .icon {
-            width: 48px;
-            height: 48px;
-        }
-
-        p {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: $secondary-color;
-            margin: 0;
-            margin-left: 10px;
         }
     }
 
@@ -298,6 +382,18 @@
         color: $secondary-color;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
+    }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .carousel-inner img {
+        height: 35vh;
     }
 }
 
@@ -312,30 +408,6 @@
 
         &:hover {
             background-color: $btn-success-hover-bg;
-        }
-    }
-}
-
-/* Sección 7: Mapa */
-.mapa-section {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    position: relative;
-
-    .embed-responsive {
-        position: relative;
-        display: block;
-        width: 100%;
-        padding-bottom: 30%;
-        overflow: hidden;
-
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
         }
     }
 }

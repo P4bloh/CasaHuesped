@@ -1,5 +1,4 @@
 /* Estilos para la barra de navegación */
-/* Estilos para la barra de navegación */
 .navbar {
     background-color: #ffffff;
 
@@ -13,8 +12,9 @@
         margin-left: 30px;
 
         img {
-            max-width: 60px;
+            max-width: 40px;
             height: auto;
+
         }
     }
 
@@ -26,6 +26,7 @@
         color: #333;
         padding: 10px 15px;
         text-decoration: none;
+        font-size: 19px;
         /* Elimina la subrayado */
 
         &:hover {
@@ -55,59 +56,81 @@
 }
 
 /* Estilos para el footer */
-.footer_container {
-    background-color: #333;
+.seccion-container {
+    background-color: #555353;
     color: #fff;
-    padding: 20px 0;
 
-    .texto-footer {
-        p {
-            margin: 0;
 
-            a {
+    .container-footer {
+        height: 300px;
+        /* Define una altura explícita para el contenedor del footer */
+        height: auto;
+        padding: 0px;
+
+        .texto-footer {
+            h2 {
+                color: #c2bdbd;
+            }
+
+            p {
+                margin: 0;
                 color: #fff;
-                text-decoration: none;
+                font-size: 22px;
 
-                &:hover {
-                    text-decoration: underline;
+                a {
+                    color: #fff;
+                    text-decoration: none;
+
+
+                    &:hover {
+                        text-decoration: none;
+                    }
                 }
             }
         }
-    }
 
-    .list-unstyled {
-        li {
-            margin: 0 10px;
+        /* Sección 7: Mapa */
+        .mapa-footer {
+            display: flex;
+            align-items: center;
+            /* Centra verticalmente el contenido */
+            height: 400px;
+            /* Asegura que el contenedor ocupe toda la altura disponible */
 
-            a {
-                color: #fff;
+            .mapa-section {
+                width: 100%;
+                margin: 0px;
+                padding: 0px;
+                height: 100%;
+                padding-top: 15px;
 
-                &:hover {
-                    color: #ddd;
-                }
+                .embed-responsive {
+                    position: relative;
+                    //display: block;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    margin: 0px;
 
-                i {
-                    transition: color 0.3s;
+                    iframe {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border: 0;
+                    }
                 }
             }
         }
+
+        .col-md-12 {
+            p {
+                font-size: 16px;
+                color: #fff;
+            }
+        }
+
     }
 
-    .text-center {
-        p {
-            margin: 0;
-        }
-    }
-
-    .text-md-end {
-        @media (min-width: 768px) {
-            text-align: end;
-        }
-    }
-
-    .text-md-start {
-        @media (min-width: 768px) {
-            text-align: start;
-        }
-    }
 }
