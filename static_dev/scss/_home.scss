@@ -22,7 +22,7 @@
 
         .carousel-item {
             position: relative;
-            transition: transform 1.2s ease-in-out; // Ajusta la duración de la transición
+            transition: transform 1.2s ease-in-out;
 
         }
 
@@ -47,50 +47,49 @@
 
     .carousel-logo-container {
         position: absolute;
-        top: 80px; // Ajusta según sea necesario
+        top: 80px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 2;
-        width: 50%; // Ajusta el tamaño según sea necesario
-        max-width: 600px; // Tamaño máximo
+        width: 50%;
+        max-width: 600px;
     }
 
     .carousel-logo {
-        width: 100%; // Ajusta el tamaño según sea necesario
+        width: 100%;
     }
-}
 
-@media (max-width: 1400px) {
-    .carousel-container .carousel-logo-container {
-        width: 100%; // Ajusta el tamaño según sea necesario
-        max-width: 490px; // Tamaño máximo
-        top: 45px; // Ajusta según sea necesario
+    @media (max-width: 1400px) {
+        .carousel-container .carousel-logo-container {
+            width: 100%;
+            max-width: 490px;
+            top: 45px;
 
+        }
     }
-}
 
-@media (max-width: 1200px) {
-    .carousel-container .carousel-logo-container {
-        width: 100%; // Ajusta el tamaño según sea necesario
-        max-width: 490px; // Tamaño máximo
-        top: 55px; // Ajusta según sea necesario
-
+    @media (max-width: 1200px) {
+        .carousel-container .carousel-logo-container {
+            width: 100%;
+            max-width: 400px;
+            top: 55px;
+        }
     }
-}
 
-@media (max-width: 768px) {
-    .carousel-container .carousel-logo-container {
-        width: 50%; // Ajusta el tamaño según sea necesario
-        max-width: 265px; // Tamaño máximo
-        top: 30px; // Ajusta según sea necesario
+    @media (max-width: 768px) {
+        .carousel-container .carousel-logo-container {
+            width: 50%;
+            max-width: 265px;
+            top: 30px;
+        }
     }
-}
 
-@media (max-width: 480px) {
-    .carousel-container .carousel-logo-container {
-        width: 80%; // Ajusta el tamaño según sea necesario
-        max-width: 250px; // Tamaño máximo
-        top: 30px; // Ajusta según sea necesario
+    @media (max-width: 480px) {
+        .carousel-container .carousel-logo-container {
+            width: 80%;
+            max-width: 250px;
+            top: 30px;
+        }
     }
 }
 
@@ -204,10 +203,10 @@
 
             .btn-consultar {
                 position: absolute;
-                bottom: 25px; // Ajusta según sea necesario
-                right: 45px; // Ajusta según sea necesario
+                bottom: 25px;
+                right: 45px;
                 padding: 10px 20px;
-                background-color: $primary-color; // Ajusta el color según tu diseño
+                background-color: $primary-color;
                 color: #fff;
                 border: none;
                 border-radius: 5px;
@@ -228,9 +227,7 @@
 
             .hab-caracteristicas {
                 flex: 0 0 40%;
-                /* Ajusta el tamaño de la columna derecha */
                 max-width: 30%;
-                /* Asegura que la columna no exceda el 40% del contenedor */
                 margin-left: 40px;
                 border-radius: 15px;
                 padding-bottom: 1px;
@@ -240,6 +237,11 @@
                 .col-md-6 {
                     flex: 0 0 100%;
                     max-width: 100%;
+                }
+
+                img {
+                    width: 100%;
+                    height: auto;
                 }
             }
         }
@@ -284,6 +286,7 @@
         color: $secondary-color;
         margin: 0;
         margin-left: 10px;
+        margin-top: 8px;
     }
 }
 
@@ -342,7 +345,7 @@
 
 
 /* Sección 5: Espacios Compartidos */
-.cont-caracteristicas {
+.esp-compartidos {
     .container {
         h4 {
             font-size: 1.5rem;
@@ -383,31 +386,17 @@
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
     }
+
+    @media (max-width: 768px) {
+        .carousel-inner img {
+            width: 100%;
+            height: auto;
+        }
+    }
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
-}
-
-@media (max-width: 768px) {
-    .carousel-inner img {
-        height: 35vh;
-    }
-}
-
-/* Sección 6: Contacto */
-.contacto-section {
-    .btn-success {
-        background-color: $btn-success-bg;
-        border: none;
-        padding: 12px 24px;
-        font-size: 1.1rem;
-        margin-top: 1rem;
-
-        &:hover {
-            background-color: $btn-success-hover-bg;
-        }
-    }
 }
