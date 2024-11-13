@@ -35,7 +35,7 @@
 
     @media (max-width: 768px) {
         .carousel-inner img {
-            height: 35vh;
+            height: 55vh;
         }
     }
 }
@@ -47,12 +47,13 @@
 
     .carousel-logo-container {
         position: absolute;
-        top: 80px;
+        top: 135px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 2;
         width: 50%;
         max-width: 600px;
+
     }
 
     .carousel-logo {
@@ -60,50 +61,59 @@
     }
 
     @media (max-width: 1400px) {
-        .carousel-container .carousel-logo-container {
+        .carousel-logo-container {
             width: 100%;
-            max-width: 490px;
-            top: 45px;
+            max-width: 560px;
+            top: 90px;
 
         }
     }
 
     @media (max-width: 1200px) {
-        .carousel-container .carousel-logo-container {
+        .carousel-logo-container {
             width: 100%;
-            max-width: 400px;
-            top: 55px;
+            max-width: 550px;
+            top: 70px;
         }
     }
 
     @media (max-width: 768px) {
-        .carousel-container .carousel-logo-container {
-            width: 50%;
-            max-width: 265px;
-            top: 30px;
+        .carousel-logo-container {
+            width: 100%;
+            max-width: 400px;
+            top: 125px;
         }
     }
 
     @media (max-width: 480px) {
-        .carousel-container .carousel-logo-container {
-            width: 80%;
-            max-width: 250px;
-            top: 30px;
+        .carousel-logo-container {
+            width: 100%;
+            max-width: 330px;
+            top: 120px;
+        }
+    }
+
+    @media (max-width: 350px) {
+        .carousel-logo-container {
+            width: 100%;
+            max-width: 270px;
+            top: 130px;
         }
     }
 }
 
 /* Sección 2: Mision */
 .container-mision {
-    background-color: rgb(224, 224, 223);
+    background-color: $mission-bg-color;
     display: flex;
     padding-bottom: 1rem 0;
     justify-content: center;
     align-items: center;
     min-height: 25vh;
 
-    .col-md-8 {
+    .mission-text {
         max-width: 100%;
+        opacity: 1;
     }
 
     h5 {
@@ -112,6 +122,7 @@
         padding: 0 20px;
         margin-top: 3rem;
         position: relative;
+
 
         &::before {
             content: "";
@@ -133,6 +144,32 @@
 
     .container-mision h5 {
         padding: 0 15px;
+    }
+}
+
+// Botoón de WhatsApp //
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 60px;
+    height: 60px;
+    background-color: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 px 1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+
+    img {
+        width: 70%;
+        height: 70%;
+    }
+
+    &:hover {
+        transform: scale(1.1);
     }
 }
 
@@ -163,9 +200,18 @@
 }
 
 /* Sección 3: Habitaciones */
-#habitaciones.no-margin-bottom {
-    margin-bottom: 2px;
+
+.section-rooms-bg {
+    background-color: $rooms-bg-color;
+    /* Color de fondo de las habitaciones */
+    padding: 20px 0;
+    /* Ajusta el padding según sea necesario */
+}
+
+#habitaciones {
+    margin-bottom: 0px;
     padding-bottom: 5px;
+    background-color: transparent;
 
     .seccion-habitaciones {
         display: flex;
@@ -173,9 +219,10 @@
         align-items: center;
         flex-wrap: wrap;
         margin-bottom: 5px;
+        margin-top: 5px;
 
         .cont-habitacion {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: $rooms-cont-bg-color;
             box-shadow: 0 4px 8px rgba(0, 0, 0.1, 0.1);
             padding: 1rem;
             margin-bottom: 1.5rem;
@@ -250,17 +297,17 @@
 
 /* Contendero iconos caracteristicas */
 
+.section-features {
+    background-color: $features-bg-color;
+    /* Color de fondo por defecto */
+    padding-top: 20px;
+
+}
+
 #feature-icons .col-md-4 {
     flex: 0 0 28%;
-    /* Ajusta el ancho de las columnas */
     max-width: 28%;
-    /* Ajusta el ancho máximo de las columnas */
-    margin-bottom: 1rem;
-    /* Ajusta el margen inferior según tus necesidades */
-    padding-left: 5px;
-    /* Ajusta el margen izquierdo */
-    padding-right: 5px;
-    /* Ajusta el margen derecho */
+
 }
 
 .feature-container {
@@ -271,8 +318,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70%;
-    /* Ajusta el ancho del contenedor */
+    width: 78%;
+
     margin: 0 auto;
 
     .icon {
