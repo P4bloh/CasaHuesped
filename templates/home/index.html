@@ -5,7 +5,7 @@
 
 
 <!-- Sección 1: Carrusel portada -->
-<div class="carousel-container">
+<div class="carousel-container section-banner">
     <div id="carouselBanner" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
         <div class="carousel-inner">
             <div class="carousel-item  active">
@@ -32,7 +32,7 @@
 <!-- Sección 2: Misión -->
 <div id="quienes" class="container-fluid my-5 container-mision mt-0 mb-0">
     <div class="row justify-content-center align-items-center">
-        <div class="col-md-8 text-center">
+        <div class="col-md-8 text-center mission-text">
             <h5>En Casa Huésped 53, ofrecemos una experiencia de hospitalidad única en el corazón histórico de La Plata. Esta casa familiar, refaccionada por su propietario arquitecto, fusiona el encanto de una casona centenaria con el 
                 confort moderno, brindando espacios ideales para descansar en un entorno que respira historia y naturaleza. Con atención personalizada y un ambiente acogedor, hacemos que cada visita se sienta como en casa.
             </h5>
@@ -40,205 +40,210 @@
     </div>
 </div>
 
+<!-- Ícono de WhatsApp -->
+<a href="https://wa.me/1234567890" target="_blank" class="whatsapp-icon">
+    <img src="{% static 'img/logos/whatsapp.png' %}" alt="WhatsApp">
+</a>
 
 <!-- Sección 3: Habitaciones -->
-<div id="habitaciones" class="container mb-3 no-margin-bottom">
-    <h2 class="text-center mb-4">Nuestras Habitaciones</h2>
-    <div class="seccion-habitaciones justify-content-center">
+<div class="section-rooms-bg">
+    <div id="habitaciones" class="container mb-3 no-margin-bottom">
+        <h2 class="text-center mb-4">Nuestras Habitaciones</h2>
+        <div class="seccion-habitaciones justify-content-center">
 
-        <!-- Habitación Rock -->
-        <div class="row mb-5 justify-content-center cont-habitacion">          
-            <div class="col-md-6">
-                <div id="carouselRock" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <a href="{% static 'img/habitaciones/rock/rock1.jpg' %}" data-fancybox="gallery-rock">
-                                <img src="{% static 'img/habitaciones/rock/rock1.jpg' %}" class="d-block w-100" alt="Habitación rock1">
-                            </a>
+            <!-- Habitación Rock -->
+            <div class="row mb-5 justify-content-center cont-habitacion">          
+                <div class="col-md-6">
+                    <div id="carouselRock" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="{% static 'img/habitaciones/rock/rock1.jpg' %}" data-fancybox="gallery-rock">
+                                    <img src="{% static 'img/habitaciones/rock/rock1.jpg' %}" class="d-block w-100" alt="Habitación rock1">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/rock/rock2.jpg' %}" data-fancybox="gallery-rock">
+                                    <img src="{% static 'img/habitaciones/rock/rock2.jpg' %}" class="d-block w-100" alt="Habitación rock2">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/rock/rock3.jpg' %}" data-fancybox="gallery-rock3">
+                                    <img src="{% static 'img/habitaciones/rock/rock3.jpg' %}" class="d-block w-100" alt="Habitación rock3">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/rock/rock4.jpg' %}" data-fancybox="gallery-rock">
+                                    <img src="{% static 'img/habitaciones/rock/rock4.jpg' %}" class="d-block w-100" alt="Habitación rock4">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/rock/rock5.jpg' %}" data-fancybox="gallery-rock">
+                                    <img src="{% static 'img/habitaciones/rock/rock5.jpg' %}" class="d-block w-100" alt="Habitación rock5">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/rock/rock6.jpg' %}" data-fancybox="gallery-rock">
+                                    <img src="{% static 'img/habitaciones/rock/rock6.jpg' %}" class="d-block w-100" alt="Habitación rock6">
+                                </a>
+                            </div>
                         </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/rock/rock2.jpg' %}" data-fancybox="gallery-rock">
-                                <img src="{% static 'img/habitaciones/rock/rock2.jpg' %}" class="d-block w-100" alt="Habitación rock2">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/rock/rock3.jpg' %}" data-fancybox="gallery-rock3">
-                                <img src="{% static 'img/habitaciones/rock/rock3.jpg' %}" class="d-block w-100" alt="Habitación rock3">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/rock/rock4.jpg' %}" data-fancybox="gallery-rock">
-                                <img src="{% static 'img/habitaciones/rock/rock4.jpg' %}" class="d-block w-100" alt="Habitación rock4">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/rock/rock5.jpg' %}" data-fancybox="gallery-rock">
-                                <img src="{% static 'img/habitaciones/rock/rock5.jpg' %}" class="d-block w-100" alt="Habitación rock5">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/rock/rock6.jpg' %}" data-fancybox="gallery-rock">
-                                <img src="{% static 'img/habitaciones/rock/rock6.jpg' %}" class="d-block w-100" alt="Habitación rock6">
-                            </a>
-                        </div>
+                        <a class="carousel-control-prev" href="#carouselRock" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselRock" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </a>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselRock" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselRock" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
                 </div>
-            </div>
-            <div class="col-md-6 hab-caracteristicas">
-                <h3>Habitación Rock</h3>
-                <ul>
-                    <li>Cama doble</li>
-                    <li>1 Camas simples</li>
-                    <li>Set Té/Café</li>
-                    <li>Pava electrica</li>
-                    <li>escritorio c/ sillas</li>
-                    <li>Baño en suite</li>
-                    <li>Wifi</li>                
-                </ul>
-                <!-- Botón Consultar -->
-                <div class="btn-container">
-                <button class="btn-consultar">Consultar</button>
-                </div>
-                
-            </div>
-
-        </div>
-
-        
-        <!-- Habitación tango -->
-        <div class="row mb-5 justify-content-center cont-habitacion">
-            <div class="col-md-6">
-                <div id="carouselTango" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <a href="{% static 'img/habitaciones/tango/tango6.jpg' %}" data-fancybox="gallery-tango">
-                                <img src="{% static 'img/habitaciones/tango/tango6.jpg' %}" class="d-block w-100" alt="Habitación Tango">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/tango/tango1.jpg' %}" data-fancybox="gallery-tango">
-                                <img src="{% static 'img/habitaciones/tango/tango1.jpg' %}" class="d-block w-100" alt="Habitación Tango">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/tango/tango2.jpg' %}" data-fancybox="gallery-tango">
-                                <img src="{% static 'img/habitaciones/tango/tango2.jpg' %}" class="d-block w-100" alt="Habitación Tango">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/tango/tango3.jpg' %}" data-fancybox="gallery-tango">
-                                <img src="{% static 'img/habitaciones/tango/tango3.jpg' %}" class="d-block w-100" alt="Habitación Tango">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/tango/tango4.jpg' %}" data-fancybox="gallery-tango">
-                                <img src="{% static 'img/habitaciones/tango/tango4.jpg' %}" class="d-block w-100" alt="Habitación Tango">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/tango/tango5.jpg' %}" data-fancybox="gallery-tango">
-                                <img src="{% static 'img/habitaciones/tango/tango5.jpg' %}" class="d-block w-100" alt="Habitación Tango">
-                            </a>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselTango" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselTango" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6 hab-caracteristicas">
-                <h3>Habitación Tango</h3>
-                <ul>
-                    <li>Cama doble</li>
-                    <li>2 Camas Simples</li>
-                    <li>Set Té/Café</li>
-                    <li>Pava electrica</li>
-                    <li>escritorio c/ sillas</li>
-                    <li>Baño privado</li>
-                    <li>Wifi</li>       
-                </ul>
-                <!-- Botón Consultar -->
-                <div class="btn-container">
+                <div class="col-md-6 hab-caracteristicas">
+                    <h3>Habitación Rock</h3>
+                    <ul>
+                        <li>Cama doble</li>
+                        <li>1 Camas simples</li>
+                        <li>Set Té/Café</li>
+                        <li>Pava electrica</li>
+                        <li>escritorio c/ sillas</li>
+                        <li>Baño en suite</li>
+                        <li>Wifi</li>                
+                    </ul>
+                    <!-- Botón Consultar -->
+                    <div class="btn-container">
                     <button class="btn-consultar">Consultar</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Habitación Jazz -->
-        <div class="row mb-5 justify-content-center cont-habitacion">        
-            <div class="col-md-6">
-                <div id="carouselJazz" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <a href="{% static 'img/habitaciones/jazz/jazz1.jpg' %}" data-fancybox="gallery-jazz">
-                                <img src="{% static 'img/habitaciones/jazz/jazz1.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/jazz/jazz2.jpg' %}" data-fancybox="gallery-jazz">
-                                <img src="{% static 'img/habitaciones/jazz/jazz2.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/jazz/jazz3.jpg' %}" data-fancybox="gallery-jazz">
-                                <img src="{% static 'img/habitaciones/jazz/jazz3.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/jazz/jazz4.jpg' %}" data-fancybox="gallery-jazz">
-                                <img src="{% static 'img/habitaciones/jazz/jazz4.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/jazz/jazz5.jpg' %}" data-fancybox="gallery-jazz">
-                                <img src="{% static 'img/habitaciones/jazz/jazz5.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="{% static 'img/habitaciones/jazz/jazz6.jpg' %}" data-fancybox="gallery-jazz">
-                                <img src="{% static 'img/habitaciones/jazz/jazz6.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
-                            </a>
-                        </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselJazz" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselJazz" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
+                    
+                </div>
+
+            </div>
+
+            
+            <!-- Habitación tango -->
+            <div class="row mb-5 justify-content-center cont-habitacion">
+                <div class="col-md-6">
+                    <div id="carouselTango" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="{% static 'img/habitaciones/tango/tango6.jpg' %}" data-fancybox="gallery-tango">
+                                    <img src="{% static 'img/habitaciones/tango/tango6.jpg' %}" class="d-block w-100" alt="Habitación Tango">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/tango/tango1.jpg' %}" data-fancybox="gallery-tango">
+                                    <img src="{% static 'img/habitaciones/tango/tango1.jpg' %}" class="d-block w-100" alt="Habitación Tango">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/tango/tango2.jpg' %}" data-fancybox="gallery-tango">
+                                    <img src="{% static 'img/habitaciones/tango/tango2.jpg' %}" class="d-block w-100" alt="Habitación Tango">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/tango/tango3.jpg' %}" data-fancybox="gallery-tango">
+                                    <img src="{% static 'img/habitaciones/tango/tango3.jpg' %}" class="d-block w-100" alt="Habitación Tango">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/tango/tango4.jpg' %}" data-fancybox="gallery-tango">
+                                    <img src="{% static 'img/habitaciones/tango/tango4.jpg' %}" class="d-block w-100" alt="Habitación Tango">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/tango/tango5.jpg' %}" data-fancybox="gallery-tango">
+                                    <img src="{% static 'img/habitaciones/tango/tango5.jpg' %}" class="d-block w-100" alt="Habitación Tango">
+                                </a>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselTango" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselTango" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 hab-caracteristicas">
+                    <h3>Habitación Tango</h3>
+                    <ul>
+                        <li>Cama doble</li>
+                        <li>2 Camas Simples</li>
+                        <li>Set Té/Café</li>
+                        <li>Pava electrica</li>
+                        <li>escritorio c/ sillas</li>
+                        <li>Baño privado</li>
+                        <li>Wifi</li>       
+                    </ul>
+                    <!-- Botón Consultar -->
+                    <div class="btn-container">
+                        <button class="btn-consultar">Consultar</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6 hab-caracteristicas">
-                <h3>Habitación Jazz</h3>
-                <ul>
-                    <li>Cama doble</li>
-                    <li>Set Té/Café</li>
-                    <li>Pava electrica</li>
-                    <li>escritorio c/ sillas</li>
-                    <li>Baño en suite</li>
-                    <li>Wifi</li>     
-                </ul>
-                <!-- Botón Consultar -->
-                <div class="btn-container">
-                    <button class="btn-consultar">Consultar</button>
+
+            <!-- Habitación Jazz -->
+            <div class="row mb-5 justify-content-center cont-habitacion">        
+                <div class="col-md-6">
+                    <div id="carouselJazz" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="{% static 'img/habitaciones/jazz/jazz1.jpg' %}" data-fancybox="gallery-jazz">
+                                    <img src="{% static 'img/habitaciones/jazz/jazz1.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/jazz/jazz2.jpg' %}" data-fancybox="gallery-jazz">
+                                    <img src="{% static 'img/habitaciones/jazz/jazz2.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/jazz/jazz3.jpg' %}" data-fancybox="gallery-jazz">
+                                    <img src="{% static 'img/habitaciones/jazz/jazz3.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/jazz/jazz4.jpg' %}" data-fancybox="gallery-jazz">
+                                    <img src="{% static 'img/habitaciones/jazz/jazz4.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/jazz/jazz5.jpg' %}" data-fancybox="gallery-jazz">
+                                    <img src="{% static 'img/habitaciones/jazz/jazz5.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="{% static 'img/habitaciones/jazz/jazz6.jpg' %}" data-fancybox="gallery-jazz">
+                                    <img src="{% static 'img/habitaciones/jazz/jazz6.jpg' %}" class="d-block w-100" alt="Habitación Jazz">
+                                </a>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselJazz" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselJazz" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 hab-caracteristicas">
+                    <h3>Habitación Jazz</h3>
+                    <ul>
+                        <li>Cama doble</li>
+                        <li>Set Té/Café</li>
+                        <li>Pava electrica</li>
+                        <li>escritorio c/ sillas</li>
+                        <li>Baño en suite</li>
+                        <li>Wifi</li>     
+                    </ul>
+                    <!-- Botón Consultar -->
+                    <div class="btn-container">
+                        <button class="btn-consultar">Consultar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
 <!-- Contenedor Iconos características -->
-<div class="container-fluid my-5">
+<div class="container-fluid section-features">
     <div id="feature-icons" class="row justify-content-center mb-5">
         <div class="col-md-4 mb-4">
             <div class="feature-container d-flex align-items-center">
