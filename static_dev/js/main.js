@@ -75,12 +75,44 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // Función para animar los elementos de la sección de espacios compartidos
+    function animateSharedSpaces() {
+        gsap.from(".esp-compartidos .carousel", {
+            x: -100, // Desplazamiento inicial desde la izquierda
+            opacity: 0, // Comienza con opacidad 0
+            duration: 1.5, // Duración de la animación
+            ease: "power2.out", // Tipo de easing
+            scrollTrigger: {
+                trigger: ".esp-compartidos .carousel",
+                start: "top 80%", // Inicia la animación cuando el elemento está al 80% de la vista
+                toggleActions: "play none none none" // Reproduce la animación al cargar la página
+            },
+            stagger: 0.3 // Retraso entre las animaciones de cada elemento
+        });
+
+        gsap.from(".esp-compartidos h4, .esp-compartidos .descripcion-espacio", {
+            y: 50, // Desplazamiento inicial desde abajo
+            opacity: 0, // Comienza con opacidad 0
+            duration: 1.5, // Duración de la animación
+            ease: "power2.out", // Tipo de easing
+            scrollTrigger: {
+                trigger: ".esp-compartidos h4, .esp-compartidos .descripcion-espacio",
+                start: "top 80%", // Inicia la animación cuando el elemento está al 80% de la vista
+                toggleActions: "play none none none" // Reproduce la animación al cargar la página
+            },
+            stagger: 0.3 // Retraso entre las animaciones de cada elemento
+        });
+    }
+
+
     // Llamar a las funciones de animación al cargar la página
     animateCarousel();
     animateLogoContainer();
     animateMissionText();
     animateTitles();
     animateFeatureContainers();
+    animateSharedSpaces();
 
     // Agregar sombra al navbar al hacer scroll
     const navbar = document.querySelector('.navbar');
