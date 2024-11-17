@@ -2,6 +2,12 @@
 
 Sitio web para el hostel bed and breakfast "Casa Huesped", desarrollado con Django. Presenta información sobre alojamiento, servicios y contacto. En desarrollo: sistema de reservas, formulario de consultas, y notificaciones por correo.
 
+## Funcionalidades Implementadas
+
+- **Sistema de Reservas:** Permite a los usuarios reservar habitaciones.
+- **Formulario de Consultas:** Los usuarios pueden enviar mensajes.
+- **Notificaciones por Correo:** El sistema envía notificaciones automáticas por correo electrónico.
+
 ## Características
 
 - Información detallada sobre las habitaciones y servicios ofrecidos.
@@ -10,9 +16,9 @@ Sitio web para el hostel bed and breakfast "Casa Huesped", desarrollado con Djan
 
 ## Tecnologías
 
-- **Backend**: Django
-- **Frontend**: HTML, CSS, JavaScript
-- **Librerías**: jQuery para interactividad, Animate.css para animaciones
+- **Backend:** Django
+- **Frontend:** HTML, CSS, JavaScript
+- **Librerías:** jQuery para interactividad, Animate.css para animaciones
 
 ## Instalación
 
