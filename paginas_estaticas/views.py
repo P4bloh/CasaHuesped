@@ -27,6 +27,10 @@ def index(request):
     imagenes_barrio = obtener_imagenes_de_carpeta('img/esp_compartidos', 'barrio')
     
     params = {
+        'page_title': 'Inicio',
+        'site_name': 'Casa Huesped',
+        'palabras_claves': 'hospedaje, casa, alquiler, vacaciones',
+        'descripcion': 'Bienvenidos a Casa Huesped, tu hogar lejos de casa',
         'imagenes_rock': imagenes_rock,
         'imagenes_tango': imagenes_tango,
         'imagenes_jazz': imagenes_jazz,
