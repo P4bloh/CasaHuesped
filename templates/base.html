@@ -11,14 +11,14 @@
 		<!-- Favicon -->
         <link rel="icon" href="{% static 'img/logos/logo_casahuesped.png' %}" type="image/x-icon">
 		<!-- Open Graph Meta Tags -->
-		<meta property="og:title" content="{% block title %}{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}{% endblock %}">
+		<meta property="og:title" content="{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}">
 		<meta property="og:description" content="{{ descripcion }}">
 		<meta property="og:image" content="{% static 'img/logos/logo_casahuesped.png' %}">
 		<meta property="og:url" content="https://www.casahuesped53.com.ar">
 		<meta property="og:type" content="website">
 		<!-- Twitter Card Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:title" content="{% block title %}{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}{% endblock %}">
+		<meta name="twitter:title" content="{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}">
 		<meta name="twitter:description" content="{{ descripcion }}">
 		<meta name="twitter:image" content="{% static 'img/logos/logo_casahuesped.png' %}">
 		<!-- Bootstrap -->
