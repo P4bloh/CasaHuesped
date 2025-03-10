@@ -1,0 +1,358 @@
+/* Sección 1: Carrusel de Banner */
+
+.section-banner {
+    background-color: $banner-bg-color;
+}
+
+#carouselBanner {
+    .carousel-inner {
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 65vh;
+            object-fit: cover;
+        }
+
+        .carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .carousel-item {
+            position: relative;
+            transition: transform 1.2s ease-in-out;
+
+        }
+
+        .carousel-item img {
+            position: relative;
+            z-index: 0;
+        }
+    }
+
+
+    @media (max-width: 768px) {
+        .carousel-inner img {
+            height: 55vh;
+        }
+    }
+
+}
+
+.carousel-container {
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+
+
+    .carousel-logo-container {
+        position: absolute;
+        top: 95px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        width: 50%;
+        max-width: 500px;
+
+
+        .carousel-logo {
+            width: 100%;
+        }
+
+        @media (max-width: 1400px) {
+
+            //width: 100%;
+            max-width: 430px;
+            top: 65px;
+        }
+
+        @media (max-width: 1200px) {
+            //width: 100%;
+            max-width: 400px;
+            top: 22%;
+        }
+
+        @media (max-width: 768px) {
+            //width: 100%;
+            max-width: 320px;
+            top: 80px;
+
+        }
+
+        @media (max-width: 480px) {
+            //width: 100%;
+            max-width: 300px;
+            top: 33%;
+        }
+
+        @media (max-width: 350px) {
+            //width: 80%;
+            max-width: 150px;
+            top: 20px;
+        }
+
+        @media (max-width: 320px) {
+            width: 80%;
+            max-width: 300px;
+            top: 33%;
+        }
+    }
+}
+
+/* Sección 2: Mision */
+.container-mision {
+    background-color: $mission-bg-color;
+    display: flex;
+    padding-bottom: 1rem 0;
+    justify-content: center;
+    align-items: center;
+    min-height: 25vh;
+
+    .mission-text {
+        max-width: 100%;
+        opacity: 1;
+    }
+
+    h5 {
+        padding: 0 20px;
+        margin-top: 3rem;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: black;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .container-mision h5 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .container-mision h5 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-mision .col-md-8 {
+        max-width: 90%;
+    }
+
+    .container-mision h5 {
+        padding: 0 15px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-mision h5 {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-mision h5 {
+        font-size: 0.8rem;
+    }
+}
+
+
+
+// Botón de WhatsApp //
+.whatsapp-icon {
+    position: fixed;
+    bottom: 3vw;
+    right: 3vw;
+    z-index: 1000;
+    width: 6vw;
+    height: 6vw;
+    background-color: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+
+    img {
+        width: 70%;
+        height: 70%;
+    }
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+        bottom: 4vw;
+        right: 4vw;
+        width: 12vw;
+        height: 12vw;
+    }
+
+    @media (max-width: 576px) {
+        bottom: 5vw;
+        right: 5vw;
+        width: 14vw;
+        height: 14vw;
+    }
+
+    @media (max-width: 480px) {
+        bottom: 6vw;
+        right: 6vw;
+        width: 15vw;
+        height: 15vw;
+    }
+
+    @media (max-width: 320px) {
+        bottom: 8vw;
+        right: 8vw;
+        width: 18vw;
+        height: 18vw;
+    }
+}
+
+/* Contenedores generales */
+.container {
+
+    p {
+        font-size: 1.1rem;
+        color: $secondary-color;
+    }
+
+    img {
+        border-radius: 8px;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Contenedor iconos caracteristicas */
+
+.section-features {
+    background-color: $features-bg-color; // Color de fondo por defecto
+    padding-top: 20px;
+
+    #feature-icons {
+        .col-md-4 {
+            flex: 0 0 28%;
+            max-width: 28%;
+        }
+    }
+
+    .feature-container {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 78%;
+        margin: 0 auto;
+
+        .icon {
+            width: 48px;
+            height: 48px;
+        }
+
+        p {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: $secondary-color;
+            margin: 0;
+            margin-left: 10px;
+            margin-top: 8px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        #feature-icons {
+            .col-md-4 {
+                flex: 0 0 45%;
+                max-width: 45%;
+            }
+        }
+
+        .feature-container {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        #feature-icons {
+            .col-md-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        .feature-container {
+            width: 60%;
+            flex-direction: column;
+            text-align: center;
+
+            .icon {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 1rem;
+                margin-left: 0;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .feature-container {
+            padding: 0.5rem;
+            width: 60%;
+
+            .icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+/* Sección 6: Modal Reglamento */
+
+.modal-content {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
+}
