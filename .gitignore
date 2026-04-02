@@ -4,3 +4,5 @@ __pycache__/
 
 # Ignorar Settings.py del repo local
 settings.py
+
+.vscode/
