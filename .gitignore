@@ -6,3 +6,5 @@ __pycache__/
 settings.py
 
 .vscode/
+# Base de datos local y archivos auxiliares
+/db.sqlite3*
