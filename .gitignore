@@ -1,10 +1,22 @@
-# Ignorar archivos de caché de Python
 __pycache__/
-*.pyc
+*.py[cod]
 
-# Ignorar Settings.py del repo local
 settings.py
 
+.env
+.env.*
+!.env.example
+
 .vscode/
-# Base de datos local y archivos auxiliares
-/db.sqlite3*
+.venv/
+venv/
+
+/db.sqlite3
+/db.sqlite3-*
+/media/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+.DS_Store
