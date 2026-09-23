@@ -19,7 +19,7 @@ La aplicación se encuentra actualmente desplegada. No incluye sistema de reserv
 
 ## Stack verificado
 
-- Backend: Django 4.2
+- Backend: Django 5.2 LTS
 - Base de datos: SQLite
 - Django Templates
 - HTML
