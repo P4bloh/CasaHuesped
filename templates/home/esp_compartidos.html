@@ -35,7 +35,7 @@
                     <div class="carousel-inner">
                         {% for img in imagenes_cocina %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <a href="{% static img %}" data-fancybox="gallery-patio">
+                                <a href="{% static img %}" data-fancybox="gallery-cocina">
                                     <img src="{% static img %}" class="d-block w-100" loading="lazy" alt="Cocina">
                                 </a>
                             </div>
@@ -58,7 +58,7 @@
                     <div class="carousel-inner">
                         {% for img in imagenes_living %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <a href="{% static img %}" data-fancybox="gallery-patio">
+                                <a href="{% static img %}" data-fancybox="gallery-living">
                                     <img src="{% static img %}" class="d-block w-100" loading="lazy" alt="Living">
                                 </a>
                             </div>
@@ -81,7 +81,7 @@
                     <div class="carousel-inner">
                         {% for img in imagenes_barrio %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <a href="{% static img %}" data-fancybox="gallery-patio">
+                                <a href="{% static img %}" data-fancybox="gallery-barrio">
                                     <img src="{% static img %}" class="d-block w-100" loading="lazy" alt="Barrio">
                                 </a>
                             </div>

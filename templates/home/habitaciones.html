@@ -13,7 +13,7 @@
                         <div class="carousel-inner">
                             {% for img in imagenes_rock %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <a href="{% static img %}" data-fancybox="gallery-tango">
+                                <a href="{% static img %}" data-fancybox="gallery-rock">
                                     <img src="{% static img %}" class="d-block w-100" loading="lazy" alt="Habitación Rock">
                                 </a>
                             </div>
@@ -44,7 +44,7 @@
                     </ul>
                     <!-- Botón Consultar -->
                     <div class="btn-container">
-                        <a href="https://wa.me/2213041484" target="_blank">
+                        <a href="{{ whatsapp_url }}" target="_blank">
                             <button class="btn-consultar">Consultar</button>
                         </a>
                     </div>
@@ -91,7 +91,7 @@
                     </ul>
                     <!-- Botón Consultar -->
                     <div class="btn-container">
-                        <a href="https://wa.me/2213041484" target="_blank">
+                        <a href="{{ whatsapp_url }}" target="_blank">
                             <button class="btn-consultar">Consultar</button>
                         </a>
                     </div>
@@ -105,7 +105,7 @@
                         <div class="carousel-inner">
                             {% for img in imagenes_jazz %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <a href="{% static img %}" data-fancybox="gallery-tango">
+                                <a href="{% static img %}" data-fancybox="gallery-jazz">
                                     <img src="{% static img %}" class="d-block w-100" loading="lazy" alt="Habitación Jazz">
                                 </a>
                             </div>
@@ -135,7 +135,7 @@
                     </ul>
                     <!-- Botón Consultar -->
                     <div class="btn-container">
-                        <a href="https://wa.me/2213041484" target="_blank">
+                        <a href="{{ whatsapp_url }}" target="_blank">
                             <button class="btn-consultar">Consultar</button>
                         </a>
                     </div>
