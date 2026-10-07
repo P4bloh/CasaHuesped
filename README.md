@@ -1,25 +1,27 @@
 # Casa Huésped 53
 
-## Descripción
-
-Sitio web de presentación de un alojamiento en La Plata, desarrollado con Django. Muestra habitaciones, espacios compartidos, servicios y vías de contacto, con un diseño responsive.
+Sitio web de presentación de un alojamiento en La Plata, desarrollado con Django. Muestra habitaciones, espacios compartidos, servicios y vías de contacto mediante una landing con diseño responsive.
 
 ## Estado actual
 
-La aplicación se encuentra actualmente desplegada. No incluye sistema de reservas, no cuenta con un formulario Django de consultas y no envía emails automáticos. Las consultas se realizan mediante enlaces a WhatsApp.
+Al **07/10/2026**, producción se encuentra estable, usa Django **5.2.17** y responde `200` por HTTPS público. Este estado fue confirmado por el responsable; los datos operativos completos están en [producción](docs/produccion.md).
 
-## Funcionalidades
+No hay sistema de reservas, formulario Django de consultas ni emails automáticos. Las reservas son una posible evolución futura, sin implementación ni compromiso de alcance actual.
+
+## Funcionalidades reales
 
 - Presentación del alojamiento y de sus espacios.
-- Sección de habitaciones.
-- Galería de imágenes generadas desde la vista.
+- Habitaciones Rock, Tango y Jazz; espacios compartidos: patio, cocina, living y barrio.
+- Galerías con grupos independientes de Fancybox.
+- Archivos JPG/JPEG, sin distinguir mayúsculas, con orden natural y determinista desde la vista.
 - Servicios y datos de contacto.
-- Enlaces de consulta por WhatsApp.
+- Consultas por WhatsApp con URL internacional centralizada en el contexto de la vista.
+- Reglamento del alojamiento.
 - Diseño responsive.
 
 ## Stack verificado
 
-- Backend: Django 5.2 LTS
+- Backend: Python y Django 5.2 LTS; versión fijada: 5.2.17
 - Base de datos: SQLite
 - Django Templates
 - HTML
@@ -30,17 +32,21 @@ La aplicación se encuentra actualmente desplegada. No incluye sistema de reserv
 - GSAP / ScrollTrigger
 - Fancybox
 - Git / GitHub
-- Producción sobre Ubuntu / DigitalOcean
-- Nginx como proxy/servidor frontal
-- Gunicorn como servidor WSGI
+- Producción: Ubuntu 22.04.5 LTS y Python 3.10.12 sobre DigitalOcean
+- Nginx 1.18.0 como proxy/servidor frontal
+- Gunicorn 23.0.0 como servidor WSGI, con 1 worker mediante socket Unix
+
+`requirements.txt` declara Django como dependencia directa. Gunicorn existe en producción, pero su instalación todavía no está representada de forma reproducible en el repositorio.
 
 ## Estructura
 
-- `casahuesped/`
-- `paginas_estaticas/`
-- `templates/`
-- `static/`
-- `static_dev/`
+- `casahuesped/`: configuración, URLs, entradas WSGI/ASGI y tests de la landing.
+- `paginas_estaticas/`: vista, helper de imágenes y tests de galerías.
+- `templates/`: landing y secciones incluidas.
+- `static_dev/`: assets versionados usados como entrada de archivos estáticos.
+- `static/`: salida generada por `collectstatic`; no se versiona.
+- `docs/`: estado vivo, producción e historial técnico.
+- `AGENTS.md`: instrucciones persistentes para agentes.
 
 > `media/` es un directorio runtime opcional y no forma parte de la estructura versionada actual.
 
@@ -51,7 +57,7 @@ git clone https://github.com/P4bloh/CasaHuesped.git
 cd CasaHuesped
 ```
 
-Crear entorno virtual:
+Usar una versión de Python compatible con Django 5.2. La versión confirmada en producción es Python 3.10.12. Crear el entorno virtual:
 
 ```bash
 python -m venv .venv
@@ -79,7 +85,7 @@ python -m pip install -r requirements.txt
 
 ## Configuración
 
-`settings.py` no se versiona en el repositorio.
+`casahuesped/settings.py` contiene la configuración de cada entorno y puede incluir secretos; no se versiona. Copiar el ejemplo para desarrollo local:
 
 Windows:
 
@@ -93,12 +99,20 @@ Linux/macOS:
 cp casahuesped/settings.example.py casahuesped/settings.py
 ```
 
-Luego:
+Revisar la configuración local y luego ejecutar:
 
 ```bash
 python manage.py migrate
+python manage.py check
+python manage.py test
 python manage.py runserver
 ```
+
+El ejemplo está orientado a desarrollo, con hosts locales y `DEBUG` activado por defecto. Lee `SECRET_KEY` y `DEBUG` desde variables del proceso; no carga un archivo `.env` automáticamente. No usarlo sin adaptar en producción.
+
+Con `DEBUG=True`, `runserver` sirve los assets desde `static_dev/`; no se necesita generar `static/` para ese flujo local. `runserver` es exclusivamente para desarrollo. La compilación SCSS aún no tiene un procedimiento documentado reproducible; `collectstatic` recolecta archivos, no compila SCSS.
+
+`db.sqlite3` contiene datos runtime y no se versiona: su conservación depende de respaldos, no de Git. Settings privado, secretos, entornos virtuales y `static/` están excluidos mediante `.gitignore`. El historial fue saneado para retirar secretos, SQLite, estáticos generados y archivos históricos innecesarios.
 
 ## Tests
 
@@ -106,31 +120,22 @@ python manage.py runserver
 python manage.py test
 ```
 
-La suite actual cubre la carga principal de la landing page y la función de obtención de imágenes, verificando que:
+La suite propia consta de **13 tests automatizados** con `SimpleTestCase`, sin dependencias de testing adicionales:
 
-- `GET /` responde `200`;
-- se renderiza `home/index.html`;
-- el contexto incluye `page_title` y `site_name`;
-- `obtener_imagenes_de_carpeta` devuelve `[]` cuando la carpeta no existe.
+- Respuesta, template y contexto de la landing.
+- Los cinco enlaces WhatsApp con el número internacional correcto.
+- Grupos Fancybox independientes de habitaciones y espacios compartidos.
+- Orden natural y desempate determinista de imágenes.
+- Admisión de JPG/JPEG en distintas mayúsculas y exclusión de otras extensiones y subdirectorios.
+- Carpetas inexistentes, rutas que son archivos, directorios vacíos y errores de lectura con logging.
 
-## Despliegue
+Los tests usan directorios temporales y `override_settings` para aislarse de las fotografías reales. No ejecutan JavaScript ni reemplazan una revisión visual en navegador. El README de `static_dev/js/tests/` pertenece a Bootstrap, no a la suite propia.
 
-El proyecto se encuentra desplegado en una infraestructura basada en:
+## Documentación técnica
 
-- Ubuntu
-- DigitalOcean
-- Nginx
-- Gunicorn
-- Django
-- SQLite
+- [Estado vivo y handoff](docs/estado.md): consultar antes de una tarea importante.
+- [Producción](docs/produccion.md): arquitectura, recursos, decisiones, despliegue y rollback.
+- [Historial técnico](docs/historial-tecnico.md): evolución y recuperación del servidor.
+- [Instrucciones para agentes](AGENTS.md): alcance, verificaciones y protección de datos.
 
-No se documentan rutas, secretos ni detalles sensibles del entorno de producción.
-
-## Mejoras futuras
-
-- reservas;
-- formulario de consultas;
-- notificaciones por email;
-- mejoras de mantenibilidad.
-
-Estas mejoras figuran como futuras y no implementadas.
+El próximo bloque previsto es auditar enlaces, SEO, analítica, UX/slider, accesibilidad y rendimiento. Los pendientes y los puntos no confirmados se mantienen en `docs/estado.md`. No se incluyen secretos en esta documentación.
