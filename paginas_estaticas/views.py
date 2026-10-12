@@ -1,9 +1,11 @@
 import logging
 import os
 import re
+from urllib.parse import urljoin
 
 from django.conf import settings
 from django.shortcuts import render
+from django.templatetags.static import static
 
 logger = logging.getLogger(__name__)
 
@@ -47,11 +49,19 @@ def index(request):
     imagenes_living = obtener_imagenes_de_carpeta('img/esp_compartidos', 'living')
     imagenes_barrio = obtener_imagenes_de_carpeta('img/esp_compartidos', 'barrio')
     
+    canonical_url = 'https://www.casahuesped53.com.ar/'
     params = {
         'page_title': 'Inicio',
         'site_name': 'Casa Huesped',
-        'palabras_claves': 'hospedaje, casa, alquiler, vacaciones',
-        'descripcion': 'Bienvenidos a Casa Huesped, tu hogar lejos de casa',
+        'seo_title': 'Casa Huésped 53 — Alojamiento en La Plata',
+        'descripcion': (
+            'Conocé Casa Huésped 53, una casona centenaria en el corazón histórico de La Plata. '
+            'Habitaciones, espacios compartidos y consultas por WhatsApp.'
+        ),
+        'canonical_url': canonical_url,
+        'social_image_url': urljoin(
+            canonical_url, static('img/banners/banner_casahuesped1.jpg')
+        ),
         'whatsapp_url': 'https://wa.me/5492213041484',
         'whatsapp_numero': '221 304-1484',
         'imagenes_rock': imagenes_rock,

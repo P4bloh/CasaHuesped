@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from urllib.parse import urlsplit
 
 from django.templatetags.static import static
 from django.test import SimpleTestCase, override_settings
@@ -12,8 +13,19 @@ class EnlacesParser(HTMLParser):
         self.enlaces = []
         self.contenidos = []
         self.enlace_actual = None
+        self.metas = []
+        self.links = []
+        self.titulos = []
+        self.en_titulo = False
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'meta':
+            self.metas.append(dict(attrs))
+        elif tag == 'link':
+            self.links.append(dict(attrs))
+        elif tag == 'title':
+            self.titulos.append('')
+            self.en_titulo = True
         if tag == 'a':
             atributos = dict(attrs)
             self.enlaces.append(atributos)
@@ -23,10 +35,14 @@ class EnlacesParser(HTMLParser):
             self.enlace_actual['botones'] += 1
 
     def handle_data(self, data):
+        if self.en_titulo:
+            self.titulos[-1] += data
         if self.enlace_actual is not None:
             self.enlace_actual['texto'] += data
 
     def handle_endtag(self, tag):
+        if tag == 'title':
+            self.en_titulo = False
         if tag == 'a':
             self.enlace_actual = None
 
@@ -105,6 +121,50 @@ class HomePageSmokeTests(SimpleTestCase):
         self.assertIn('site_name', response.context)
         self.assertEqual(response.context['page_title'], 'Inicio')
         self.assertEqual(response.context['site_name'], 'Casa Huesped')
+
+    def test_titulo_y_descripciones_seo_son_correctos(self):
+        parser = self.obtener_parser(self.client.get('/'))
+        titulo = 'Casa Huésped 53 — Alojamiento en La Plata'
+        descripcion = (
+            'Conocé Casa Huésped 53, una casona centenaria en el corazón histórico de La Plata. '
+            'Habitaciones, espacios compartidos y consultas por WhatsApp.'
+        )
+        self.assertEqual(parser.titulos, [titulo])
+        for atributo, nombre, esperado in (
+            ('name', 'description', descripcion),
+            ('property', 'og:title', titulo),
+            ('name', 'twitter:title', titulo),
+            ('property', 'og:description', descripcion),
+            ('name', 'twitter:description', descripcion),
+        ):
+            with self.subTest(meta=nombre):
+                valores = [m.get('content') for m in parser.metas if m.get(atributo) == nombre]
+                self.assertEqual(valores, [esperado])
+
+    def test_canonical_es_unica_y_coincide_con_og_url(self):
+        parser = self.obtener_parser(self.client.get('/'))
+        canonical = [link.get('href') for link in parser.links
+                     if 'canonical' in link.get('rel', '').split()]
+        og_urls = [m.get('content') for m in parser.metas if m.get('property') == 'og:url']
+        self.assertEqual(canonical, ['https://www.casahuesped53.com.ar/'])
+        self.assertEqual(og_urls, canonical)
+
+    def test_imagenes_sociales_usan_el_banner_con_url_https_absoluta(self):
+        parser = self.obtener_parser(self.client.get('/'))
+        esperado = 'https://www.casahuesped53.com.ar/static/img/banners/banner_casahuesped1.jpg'
+        for atributo, nombre in (('property', 'og:image'), ('name', 'twitter:image')):
+            with self.subTest(meta=nombre):
+                urls = [m.get('content') for m in parser.metas if m.get(atributo) == nombre]
+                self.assertEqual(urls, [esperado])
+                partes = urlsplit(urls[0])
+                self.assertEqual(partes.scheme, 'https')
+                self.assertTrue(partes.netloc)
+
+    def test_keywords_no_se_renderiza_ni_se_incluye_en_contexto(self):
+        response = self.client.get('/')
+        parser = self.obtener_parser(response)
+        self.assertFalse(any(m.get('name', '').lower() == 'keywords' for m in parser.metas))
+        self.assertNotIn('palabras_claves', response.context)
 
     def test_todos_los_enlaces_whatsapp_usan_el_numero_internacional(self):
         response = self.client.get('/')

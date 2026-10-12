@@ -75,3 +75,7 @@ Reservas permanece como posible evolución futura. No forma parte de la funciona
 ## Cómo mantener este documento
 
 Actualizar fecha, fuente y resultado al confirmar cambios. Separar resultados locales de los del servidor. Si cambia un dato operativo, actualizar también [producción](produccion.md); registrar hitos relevantes en [historial técnico](historial-tecnico.md). No añadir secretos ni presentar propuestas como trabajo realizado.
+
+## SEO hito 1 — cambios locales al 12/10/2026
+
+Título y descripción aprobados centralizados en la vista, canonical `https://www.casahuesped53.com.ar/` compartida con Open Graph, imagen social HTTPS absoluta usando `banner_casahuesped1.jpg` (1920×1099) y eliminación de meta keywords. Sin cambios de contenido visible, estilos o assets. Suite ampliada a 19 tests, todos aprobados; `manage.py check` sin problemas. Estos cambios no están desplegados; el baseline de trabajo es `f6c9db7`, según el responsable.
