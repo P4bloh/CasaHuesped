@@ -1,10 +1,43 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
+from xml.etree import ElementTree
 
 from django.test import SimpleTestCase, override_settings
 
 from paginas_estaticas.views import obtener_imagenes_de_carpeta
+
+
+class RastreoSEOTests(SimpleTestCase):
+    def test_robots_responde_texto_plano_y_permite_rastreo(self):
+        response = self.client.get('/robots.txt')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'text/plain; charset=utf-8')
+        directivas = [linea.strip() for linea in response.content.decode().splitlines()]
+        self.assertEqual(directivas, [
+            'User-agent: *',
+            'Disallow:',
+            'Sitemap: https://www.casahuesped53.com.ar/sitemap.xml',
+        ])
+        self.assertNotIn('Disallow: /', directivas)
+
+    def test_sitemap_es_xml_valido_con_solo_la_url_canonica(self):
+        response = self.client.get('/sitemap.xml')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/xml; charset=utf-8')
+        raiz = ElementTree.fromstring(response.content)
+        namespace = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
+        self.assertEqual(raiz.tag, f'{namespace}urlset')
+        self.assertEqual([nodo.tag for nodo in raiz], [f'{namespace}url'])
+        urls = raiz.findall(f'{namespace}url')
+        self.assertEqual([nodo.tag for nodo in urls[0]], [f'{namespace}loc'])
+        self.assertEqual(
+            [nodo.text for nodo in raiz.findall(f'{namespace}url/{namespace}loc')],
+            ['https://www.casahuesped53.com.ar/'],
+        )
+        self.assertNotIn(b'https://casahuesped53.com.ar/', response.content)
 
 
 class ImagenesCarpetaTests(SimpleTestCase):

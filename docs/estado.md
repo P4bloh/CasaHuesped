@@ -1,8 +1,8 @@
 # Estado del proyecto y handoff
 
-**Última actualización: 07/10/2026.**
+**Última actualización: 13/10/2026.**
 
-Este documento es el punto de entrada para continuar el trabajo. Los datos de producción fueron confirmados por el responsable al 07/10/2026; esta actualización documental no incluyó acceso al servidor. Las métricas son una fotografía de esa fecha, no valores monitorizados en tiempo real.
+Este documento es el punto de entrada para continuar el trabajo. Producción fue accedida y verificada directamente el 12/10/2026, según los hechos confirmados por el responsable. Esta corrección documental del 13/10/2026 no incluye un nuevo acceso. Las métricas de recursos conservan la medición del 07/10/2026, no valores monitorizados en tiempo real.
 
 ## Estado confirmado
 
@@ -10,12 +10,12 @@ Este documento es el punto de entrada para continuar el trabajo. Los datos de pr
 - Landing de presentación, habitaciones, espacios compartidos, servicios, ubicación, reglamento y consultas por WhatsApp.
 - URL internacional de WhatsApp centralizada en la vista; grupos de Fancybox separados por espacio.
 - Galerías JPG/JPEG con orden natural, filtrado de archivos y manejo de errores de lectura.
-- 13 tests propios automatizados. El repositorio contiene 4 tests de landing y 9 del helper de imágenes.
+- Suite local actual: 21 tests automatizados (10 de landing, 9 del helper de imágenes y 2 de rastreo SEO). En producción se aprobaron 19 tests antes del deploy del hito SEO 1, el 12/10/2026.
 - No hay reservas, formulario Django de consultas ni emails automáticos.
 
 ## Stack y versión desplegada
 
-| Elemento | Estado al 07/10/2026 |
+| Elemento | Estado confirmado / fecha |
 | --- | --- |
 | Aplicación | Python 3.10.12 y Django 5.2.17 LTS |
 | Presentación | Django Templates, HTML, CSS/SCSS, Bootstrap, JavaScript, jQuery, GSAP/ScrollTrigger y Fancybox |
@@ -28,9 +28,9 @@ Este documento es el punto de entrada para continuar el trabajo. Los datos de pr
 | Servicio systemd / directorio de trabajo | `gunicorn.service`; `WorkingDirectory=/root/casahuesped` |
 | Socket compartido por Gunicorn y Nginx | `/root/casahuesped.sock` |
 | Alias estáticos de Nginx | `/root/casahuesped/static/` y `/root/casahuesped/static_dev/` |
-| Commit desplegado | `982d3b48f4bc29a709f61a348495a48c0c6b286b` |
+| Commit desplegado | `2eca10e`, verificado directamente el 12/10/2026 |
 
-El checkout local revisado coincide con ese commit. Una edición posterior de documentación o código no implica que producción se haya actualizado.
+El commit desplegado y el baseline local del hito SEO 2 son `2eca10e`. El hito SEO 1 está desplegado y verificado; el hito SEO 2 permanece exclusivamente local. Las versiones y rutas operativas no actualizadas conservan la fotografía del 07/10/2026.
 
 ## Servidor y recursos
 
@@ -76,6 +76,12 @@ Reservas permanece como posible evolución futura. No forma parte de la funciona
 
 Actualizar fecha, fuente y resultado al confirmar cambios. Separar resultados locales de los del servidor. Si cambia un dato operativo, actualizar también [producción](produccion.md); registrar hitos relevantes en [historial técnico](historial-tecnico.md). No añadir secretos ni presentar propuestas como trabajo realizado.
 
-## SEO hito 1 — cambios locales al 12/10/2026
+## SEO hito 1 — desplegado y verificado el 12/10/2026
 
-Título y descripción aprobados centralizados en la vista, canonical `https://www.casahuesped53.com.ar/` compartida con Open Graph, imagen social HTTPS absoluta usando `banner_casahuesped1.jpg` (1920×1099) y eliminación de meta keywords. Sin cambios de contenido visible, estilos o assets. Suite ampliada a 19 tests, todos aprobados; `manage.py check` sin problemas. Estos cambios no están desplegados; el baseline de trabajo es `f6c9db7`, según el responsable.
+Título y descripción aprobados centralizados en la vista, canonical `https://www.casahuesped53.com.ar/` compartida con Open Graph, imagen social HTTPS absoluta usando `banner_casahuesped1.jpg` (1920×1099) y eliminación de meta keywords. Sin cambios de contenido visible, estilos o assets. El commit `2eca10e` fue desplegado: 19 tests OK en producción antes del deploy y `manage.py check` OK. Se verificaron directamente Gunicorn activo, HTTPS 200 y title, description, canonical, og:url e imágenes sociales en el HTML servido.
+
+## SEO hito 2 — rastreo/indexabilidad, implementación local
+
+Implementados `/robots.txt` (texto plano, rastreo permitido y sitemap HTTPS absoluto) y `/sitemap.xml` (XML con únicamente `https://www.casahuesped53.com.ar/`). Ambos endpoints comparten la URL canónica de la landing y no requieren nuevas dependencias ni `django.contrib.sitemaps`. Se agregaron dos tests; la suite local pasa de 19 a 21 tests. Validaciones locales: `manage.py check` sin problemas y los 21 tests aprobados. No se modificaron recursos visuales ni se hizo deploy.
+
+El responsable confirmó el 12/10/2026 que Nginx ya consolida HTTP con/sin www y HTTPS sin www hacia `https://www.casahuesped53.com.ar/`. Nginx fue modificado manualmente el 12/10/2026 y las tres variantes se comprobaron directamente con curl: HTTP 301 desde `http://www.casahuesped53.com.ar/`, `http://casahuesped53.com.ar/` y `https://casahuesped53.com.ar/` hacia la canonical. En producción `/robots.txt` y `/sitemap.xml` continúan en 404 hasta el próximo deploy autorizado. Esta revisión solamente corrige documentación.

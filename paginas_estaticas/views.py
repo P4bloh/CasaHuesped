@@ -4,10 +4,28 @@ import re
 from urllib.parse import urljoin
 
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.templatetags.static import static
 
 logger = logging.getLogger(__name__)
+
+CANONICAL_URL = 'https://www.casahuesped53.com.ar/'
+
+
+def robots(request):
+    contenido = f'User-agent: *\nDisallow:\nSitemap: {CANONICAL_URL}sitemap.xml\n'
+    return HttpResponse(contenido, content_type='text/plain; charset=utf-8')
+
+
+def sitemap(request):
+    contenido = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f'  <url><loc>{CANONICAL_URL}</loc></url>\n'
+        '</urlset>\n'
+    )
+    return HttpResponse(contenido, content_type='application/xml; charset=utf-8')
 
 
 def obtener_imagenes_de_carpeta(ruta_base, nombre_carpeta):
@@ -49,7 +67,7 @@ def index(request):
     imagenes_living = obtener_imagenes_de_carpeta('img/esp_compartidos', 'living')
     imagenes_barrio = obtener_imagenes_de_carpeta('img/esp_compartidos', 'barrio')
     
-    canonical_url = 'https://www.casahuesped53.com.ar/'
+    canonical_url = CANONICAL_URL
     params = {
         'page_title': 'Inicio',
         'site_name': 'Casa Huesped',

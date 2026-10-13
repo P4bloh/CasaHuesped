@@ -1,6 +1,6 @@
 # Producción: arquitectura y operación
 
-**Estado confirmado por el responsable al 07/10/2026.** Esta documentación no implica una inspección remota nueva. Las rutas registradas son datos operativos, no credenciales; no se incluyen claves, valores privados de settings ni contenido de SQLite.
+**Última actualización documental: 13/10/2026.** Producción fue accedida y verificada directamente el 12/10/2026, según los hechos confirmados por el responsable. Esta corrección documental no realiza una inspección remota nueva; las métricas de recursos conservan la medición del 07/10/2026. Las rutas registradas son datos operativos, no credenciales; no se incluyen claves, valores privados de settings ni contenido de SQLite.
 
 ## Arquitectura actual
 
@@ -26,8 +26,8 @@ Cliente HTTPS → Nginx → socket Unix → Gunicorn (1 worker) → Django → S
 | Servicio systemd | `gunicorn.service` |
 | Directorio de trabajo | `WorkingDirectory=/root/casahuesped` |
 | Alias estáticos de Nginx | `/root/casahuesped/static/` y `/root/casahuesped/static_dev/` |
-| Commit activo | `982d3b48f4bc29a709f61a348495a48c0c6b286b` |
-| Validación pública | HTTPS responde `200` |
+| Commit activo | `2eca10e`, verificado el 12/10/2026 |
+| Validación pública | Gunicorn activo y HTTPS `200`, verificados el 12/10/2026 |
 
 Comando efectivo de Gunicorn en `gunicorn.service`:
 
@@ -36,6 +36,18 @@ Comando efectivo de Gunicorn en `gunicorn.service`:
 ```
 
 El servicio trabaja en `/root/casahuesped`. Nginx usa el mismo socket y los dos alias estáticos registrados en la tabla.
+
+## Consolidación de dominio — confirmación del responsable al 12/10/2026
+
+Nginx fue configurado manualmente en producción para consolidar estas variantes:
+
+- `http://www.casahuesped53.com.ar/`
+- `http://casahuesped53.com.ar/`
+- `https://casahuesped53.com.ar/`
+
+hacia `https://www.casahuesped53.com.ar/`, la URL canónica de la landing, mediante HTTP 301. El cambio manual se realizó el 12/10/2026 y las redirecciones se comprobaron directamente con curl. Esta revisión documental no modifica Nginx ni accede a producción.
+
+Los endpoints Django `/robots.txt` y `/sitemap.xml` se implementaron localmente en el hito SEO 2, con referencia exclusivamente al dominio HTTPS con www. El responsable informó que actualmente devuelven 404 en producción; quedan pendientes de deploy y validación pública autorizados. Las versiones y métricas operativas del resto del documento conservan la fotografía del 07/10/2026.
 
 ## Recursos y medidas operativas
 
@@ -77,7 +89,7 @@ El conjunto fuente optimizado contiene 70 JPG finales, con una reducción aproxi
 
 ## Despliegue y validaciones
 
-La migración ya realizada usó un clon limpio, conservando settings y SQLite fuera de Git. Se validaron `check`, los tests, migraciones, `collectstatic` y un arranque aislado de Gunicorn antes de activar el código. El número actual de tests propios es 13.
+La migración ya realizada usó un clon limpio, conservando settings y SQLite fuera de Git. Se validaron `check`, los tests, migraciones, `collectstatic` y un arranque aislado de Gunicorn antes de activar el código. En aquella migración había 13 tests. El 12/10/2026 se desplegó el hito SEO 1 (`2eca10e`): 19 tests OK en producción antes del deploy y `manage.py check` OK; después se verificaron Gunicorn activo, HTTPS 200 y title, description, canonical, og:url e imágenes sociales en el HTML servido. El hito SEO 2 está solo implementado localmente, con 21 tests; sus endpoints `/robots.txt` y `/sitemap.xml` siguen en 404 en producción hasta un deploy autorizado.
 
 Para un próximo despliegue autorizado, revisar esta secuencia y completar los datos operativos pendientes:
 
