@@ -47,6 +47,30 @@ class EnlacesParser(HTMLParser):
             self.enlace_actual = None
 
 
+class SemanticaParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.elementos = []
+        self.imagenes = []
+        self.actual = None
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'):
+            self.actual = {'tag': tag, 'attrs': dict(attrs), 'texto': ''}
+            self.elementos.append(self.actual)
+        elif tag == 'img':
+            self.imagenes.append(dict(attrs))
+
+    def handle_data(self, data):
+        if self.actual is not None:
+            self.actual['texto'] += data
+
+    def handle_endtag(self, tag):
+        if self.actual is not None and self.actual['tag'] == tag:
+            self.actual['texto'] = ' '.join(self.actual['texto'].split())
+            self.actual = None
+
+
 class HomePageSmokeTests(SimpleTestCase):
     def setUp(self):
         super().setUp()
@@ -75,6 +99,59 @@ class HomePageSmokeTests(SimpleTestCase):
         parser.feed(response.content.decode(response.charset))
         parser.close()
         return parser
+
+    def obtener_semantica(self):
+        response = self.client.get('/')
+        parser = SemanticaParser()
+        parser.feed(response.content.decode(response.charset))
+        parser.close()
+        return parser
+
+    def test_h1_es_unico_y_esta_visualmente_oculto(self):
+        headings = [e for e in self.obtener_semantica().elementos if e['tag'] == 'h1']
+        self.assertEqual(len(headings), 1)
+        self.assertEqual(headings[0]['texto'], 'Casa Huésped 53 — Alojamiento en La Plata')
+        self.assertIn('visually-hidden', headings[0]['attrs'].get('class', '').split())
+
+    def test_mision_es_parrafo_con_estilo_h5_y_texto_original(self):
+        elementos = self.obtener_semantica().elementos
+        mision = [e for e in elementos if e['texto'].startswith('En Casa Huésped 53,')]
+        self.assertEqual(len(mision), 1)
+        self.assertEqual(mision[0]['tag'], 'p')
+        self.assertIn('h5', mision[0]['attrs'].get('class', '').split())
+        self.assertEqual(mision[0]['texto'], (
+            'En Casa Huésped 53, ofrecemos una experiencia de hospitalidad única en el corazón '
+            'histórico de La Plata. Esta casa familiar, refaccionada por su propietario arquitecto, '
+            'fusiona el encanto de una casona centenaria con el confort moderno, brindando espacios '
+            'ideales para descansar en un entorno que respira historia y naturaleza. Con atención '
+            'personalizada y un ambiente acogedor, hacemos que cada visita se sienta como en casa. '
+            'Además, nuestra propuesta se enriquece con la interacción con un vivero de plantas de '
+            'interior, Apical, y un estudio de arquitectura convirtiendo nuestro espacio en una Casa Viva.'
+        ))
+
+    def test_headings_de_espacios_y_habitaciones(self):
+        elementos = self.obtener_semantica().elementos
+        for nombre in ('Patio', 'Cocina', 'Living', 'Barrio'):
+            with self.subTest(espacio=nombre):
+                headings = [e for e in elementos if e['texto'] == nombre and e['tag'].startswith('h')]
+                self.assertEqual([e['tag'] for e in headings], ['h3'])
+                self.assertEqual(headings[0]['attrs']['class'].split(), ['text-center', 'mt-3', 'h4'])
+        for nombre, tag in (
+            ('Nuestras Habitaciones', 'h2'),
+            ('Habitación Rock', 'h3'), ('Habitación Tango', 'h3'), ('Habitación Jazz', 'h3'),
+        ):
+            self.assertEqual([e['tag'] for e in elementos if e['texto'] == nombre], [tag])
+
+    def test_alt_de_logo_cochera_y_banners(self):
+        imagenes = self.obtener_semantica().imagenes
+        for ruta, esperado in (
+            ('img/banners/logo-banner.png', 'Casa Huésped 53'),
+            ('img/logos/cochera.png', 'Cochera opcional'),
+            *((f'img/banners/banner_casahuesped{n}.jpg', '') for n in range(1, 5)),
+        ):
+            with self.subTest(imagen=ruta):
+                self.assertEqual([img.get('alt') for img in imagenes if img.get('src') == static(ruta)],
+                                 [esperado])
 
     def test_consultas_son_enlaces_whatsapp_sin_botones_anidados(self):
         response = self.client.get('/')

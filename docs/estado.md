@@ -1,6 +1,6 @@
 # Estado del proyecto y handoff
 
-**Última actualización: 13/10/2026.**
+**Última actualización: 14/10/2026.**
 
 Este documento es el punto de entrada para continuar el trabajo. Producción fue accedida y verificada directamente el 12/10/2026, según los hechos confirmados por el responsable. Esta corrección documental del 13/10/2026 no incluye un nuevo acceso. Las métricas de recursos conservan la medición del 07/10/2026, no valores monitorizados en tiempo real.
 
@@ -85,3 +85,9 @@ Título y descripción aprobados centralizados en la vista, canonical `https://w
 Implementados `/robots.txt` (texto plano, rastreo permitido y sitemap HTTPS absoluto) y `/sitemap.xml` (XML con únicamente `https://www.casahuesped53.com.ar/`). Ambos endpoints comparten la URL canónica de la landing y no requieren nuevas dependencias ni `django.contrib.sitemaps`. Se agregaron dos tests; la suite local pasa de 19 a 21 tests. Validaciones locales: `manage.py check` sin problemas y los 21 tests aprobados. No se modificaron recursos visuales ni se hizo deploy.
 
 El responsable confirmó el 12/10/2026 que Nginx ya consolida HTTP con/sin www y HTTPS sin www hacia `https://www.casahuesped53.com.ar/`. Nginx fue modificado manualmente el 12/10/2026 y las tres variantes se comprobaron directamente con curl: HTTP 301 desde `http://www.casahuesped53.com.ar/`, `http://casahuesped53.com.ar/` y `https://casahuesped53.com.ar/` hacia la canonical. En producción `/robots.txt` y `/sitemap.xml` continúan en 404 hasta el próximo deploy autorizado. Esta revisión solamente corrige documentación.
+
+## SEO hito 3 — implementación local al 14/10/2026
+
+Baseline local: main, commit 4014b85. El responsable confirmó en esta tarea que los hitos SEO 1 y 2 ya están desplegados y verificados; esto actualiza las referencias históricas anteriores al hito 2 pendiente. No se accedió a producción en esta tarea.
+
+Implementados un h1 único con visually-hidden, misión como párrafo con clase h5 y texto intacto, títulos de espacios como h3 con clase visual h4 y alt corregidos. Los banners del hero usan alt vacío por su función decorativa. Solo se ajustaron las dos referencias GSAP de h4 a .h4 para mantener la animación; sin cambios visuales intencionales, CSS, SCSS ni imágenes modificados. Suite local: 25 tests OK, manage.py check sin problemas. Pendiente de revisión visual local y deploy autorizado; no se hizo commit ni push.
