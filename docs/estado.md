@@ -2,35 +2,40 @@
 
 **Última actualización: 14/10/2026.**
 
-Este documento es el punto de entrada para continuar el trabajo. Producción fue accedida y verificada directamente el 12/10/2026, según los hechos confirmados por el responsable. Esta corrección documental del 13/10/2026 no incluye un nuevo acceso. Las métricas de recursos conservan la medición del 07/10/2026, no valores monitorizados en tiempo real.
+Fuente del estado productivo: confirmación del responsable al 14/10/2026. Esta tarea actualiza documentación sin acceder al servidor. Las métricas de recursos conservan su fecha de medición del 07/10/2026.
 
-## Estado confirmado
+## Cierre Portfolio v1.0
 
-- Sitio estable en producción; HTTPS público responde `200`.
-- Landing de presentación, habitaciones, espacios compartidos, servicios, ubicación, reglamento y consultas por WhatsApp.
-- URL internacional de WhatsApp centralizada en la vista; grupos de Fancybox separados por espacio.
-- Galerías JPG/JPEG con orden natural, filtrado de archivos y manejo de errores de lectura.
-- Suite local actual: 21 tests automatizados (10 de landing, 9 del helper de imágenes y 2 de rastreo SEO). En producción se aprobaron 19 tests antes del deploy del hito SEO 1, el 12/10/2026.
-- No hay reservas, formulario Django de consultas ni emails automáticos.
+El proyecto entra en fase de cierre Portfolio v1.0 como landing de alojamiento real, con foco Backend Python/Django. El cliente está conforme y el sitio funciona correctamente en desktop y móvil; QA visual básico aprobado. Esto no implica una auditoría exhaustiva de accesibilidad, seguridad o rendimiento.
 
-## Stack y versión desplegada
+## Estado confirmado en producción
 
-| Elemento | Estado confirmado / fecha |
+- Rama local revisada: `main`; HEAD y commit desplegado: `d3f67c5` — «Mejora semantica y accesibilidad SEO».
+- Python 3.10.12, Django 5.2.17 LTS y SQLite; Ubuntu 22.04.5 LTS, Nginx 1.18.0 y Gunicorn 23.0.0.
+- Gunicorn activo con 1 worker mediante socket Unix; todavía ejecuta como root.
+- HTTPS público operativo; canonical `https://www.casahuesped53.com.ar/`.
+- Variantes HTTP con/sin www y HTTPS sin www consolidadas por Nginx mediante HTTP 301.
+- 25 tests automatizados aprobados: 14 de landing/semántica, 9 de galerías y 2 de rastreo SEO.
+- SEO hitos 1–3 desplegados y verificados: metadatos/canonical/sociales; robots y sitemap; semántica y alt.
+- `/robots.txt` y `/sitemap.xml` responden 200. El sitemap contiene únicamente la URL canónica.
+- Landing con habitaciones, espacios, servicios, mapa, reglamento y consultas por WhatsApp. Galerías JPG/JPEG con grupos Fancybox independientes y orden natural.
+- No hay reservas, cuentas de huéspedes, pagos, formulario Django de consultas ni emails automáticos.
+
+## Seguridad mínima revisada
+
+`DEBUG=False` y `ALLOWED_HOSTS` limitado a los dominios reales. `SESSION_COOKIE_SECURE=True` y `CSRF_COOKIE_SECURE=True` fueron agregados manualmente al settings privado de producción el 14/10/2026.
+
+Según la verificación confirmada, `manage.py check --deploy` conserva únicamente W004 y W008: Django no configura HSTS ni la redirección HTTP→HTTPS, porque se implementan en Nginx. No son advertencias silenciadas ni ajustes realizados por esta tarea. Ver [producción](produccion.md).
+
+## Rutas operativas confirmadas
+
+| Elemento | Valor |
 | --- | --- |
-| Aplicación | Python 3.10.12 y Django 5.2.17 LTS |
-| Presentación | Django Templates, HTML, CSS/SCSS, Bootstrap, JavaScript, jQuery, GSAP/ScrollTrigger y Fancybox |
-| Base de datos | SQLite |
-| Servidor | Ubuntu 22.04.5 LTS; kernel 5.15.0-198-generic |
-| HTTP / WSGI | Nginx 1.18.0 y Gunicorn 23.0.0 |
-| Gunicorn | 1 worker, socket Unix; todavía ejecuta como root |
 | Código activo | `/root/casahuesped` |
 | Entorno virtual | `/root/myenv52` |
-| Servicio systemd / directorio de trabajo | `gunicorn.service`; `WorkingDirectory=/root/casahuesped` |
-| Socket compartido por Gunicorn y Nginx | `/root/casahuesped.sock` |
+| Servicio / directorio de trabajo | `gunicorn.service`; `WorkingDirectory=/root/casahuesped` |
+| Socket de Gunicorn y Nginx | `/root/casahuesped.sock` |
 | Alias estáticos de Nginx | `/root/casahuesped/static/` y `/root/casahuesped/static_dev/` |
-| Commit desplegado | `2eca10e`, verificado directamente el 12/10/2026 |
-
-El commit desplegado y el baseline local del hito SEO 2 son `2eca10e`. El hito SEO 1 está desplegado y verificado; el hito SEO 2 permanece exclusivamente local. Las versiones y rutas operativas no actualizadas conservan la fotografía del 07/10/2026.
 
 ## Servidor y recursos
 
@@ -56,38 +61,18 @@ El rollback de aplicación está en `/root/casahuesped-old-20261007`: es una cop
 
 El kernel fallback `5.4.0-216` sigue instalado; el activo es `5.15.0-198-generic`. El rollback de aplicación y el kernel fallback son recursos distintos. La restauración completa de backups todavía no está probada y queda definir la política definitiva de retención/eliminación de ambos recursos. Ver [producción](produccion.md).
 
-## Pendientes técnicos conocidos
+## Pendientes conocidos
 
-- Sustituir la ejecución de Gunicorn como root por un usuario de servicio, mediante una tarea planificada.
-- Hacer reproducible la dependencia de Gunicorn: producción usa 23.0.0, pero `requirements.txt` solo declara Django 5.2.17.
-- Probar y documentar una restauración completa de backups de SQLite, settings y demás información necesaria para recuperar el servicio.
-- Definir la política definitiva de retención/eliminación del rollback de aplicación y del kernel fallback.
-- La auditoría previa registró acoplamiento de galerías a `STATICFILES_DIRS[0]`, doble carga de Bootstrap CSS y ausencia de un procedimiento reproducible de compilación SCSS. Revisar su vigencia antes de proponer cambios.
+- Sustituir Gunicorn como root por un usuario de servicio; hacer reproducible su dependencia (23.0.0 en producción, ausente de `requirements.txt`).
+- Probar una restauración completa de backups y definir retención/eliminación del rollback y kernel fallback.
+- Deuda visual menor no bloqueante: revisar en una tarea futura espaciado/alineación de habitaciones y variaciones de altura del contenedor según las fotos en móvil. No reabrir el experimento responsive como parte del cierre documental.
+- Acoplamiento de galerías a `STATICFILES_DIRS[0]`, doble inclusión de Bootstrap y ausencia de un build SCSS reproducible aprobado.
+- Analítica y revisiones adicionales de UX, accesibilidad o rendimiento requieren alcance propio; no se afirma una integración de analítica confirmada.
 
-Estos puntos se registran para continuidad; no se resolvieron en esta tarea documental.
+Estos pendientes no se resolvieron en el cierre documental. No hay cambios funcionales o visuales locales pendientes de deploy en esta tarea; solo documentación para revisión.
 
-## Próximo bloque previsto
+## Próximo paso y mantenimiento
 
-Auditar enlaces, SEO, analítica, UX/slider, accesibilidad y rendimiento. Primero comprobar el comportamiento real y las herramientas existentes, luego proponer tareas pequeñas y verificables. Que analítica figure en la auditoría no significa que exista una integración confirmada.
+Revisar y aprobar la documentación de Portfolio v1.0. No hay autorización de commit, push ni deploy. Reservas permanece como posible evolución futura, sin funcionalidad implementada ni compromiso de alcance.
 
-Reservas permanece como posible evolución futura. No forma parte de la funcionalidad actual ni del próximo bloque autorizado.
-
-## Cómo mantener este documento
-
-Actualizar fecha, fuente y resultado al confirmar cambios. Separar resultados locales de los del servidor. Si cambia un dato operativo, actualizar también [producción](produccion.md); registrar hitos relevantes en [historial técnico](historial-tecnico.md). No añadir secretos ni presentar propuestas como trabajo realizado.
-
-## SEO hito 1 — desplegado y verificado el 12/10/2026
-
-Título y descripción aprobados centralizados en la vista, canonical `https://www.casahuesped53.com.ar/` compartida con Open Graph, imagen social HTTPS absoluta usando `banner_casahuesped1.jpg` (1920×1099) y eliminación de meta keywords. Sin cambios de contenido visible, estilos o assets. El commit `2eca10e` fue desplegado: 19 tests OK en producción antes del deploy y `manage.py check` OK. Se verificaron directamente Gunicorn activo, HTTPS 200 y title, description, canonical, og:url e imágenes sociales en el HTML servido.
-
-## SEO hito 2 — rastreo/indexabilidad, implementación local
-
-Implementados `/robots.txt` (texto plano, rastreo permitido y sitemap HTTPS absoluto) y `/sitemap.xml` (XML con únicamente `https://www.casahuesped53.com.ar/`). Ambos endpoints comparten la URL canónica de la landing y no requieren nuevas dependencias ni `django.contrib.sitemaps`. Se agregaron dos tests; la suite local pasa de 19 a 21 tests. Validaciones locales: `manage.py check` sin problemas y los 21 tests aprobados. No se modificaron recursos visuales ni se hizo deploy.
-
-El responsable confirmó el 12/10/2026 que Nginx ya consolida HTTP con/sin www y HTTPS sin www hacia `https://www.casahuesped53.com.ar/`. Nginx fue modificado manualmente el 12/10/2026 y las tres variantes se comprobaron directamente con curl: HTTP 301 desde `http://www.casahuesped53.com.ar/`, `http://casahuesped53.com.ar/` y `https://casahuesped53.com.ar/` hacia la canonical. En producción `/robots.txt` y `/sitemap.xml` continúan en 404 hasta el próximo deploy autorizado. Esta revisión solamente corrige documentación.
-
-## SEO hito 3 — implementación local al 14/10/2026
-
-Baseline local: main, commit 4014b85. El responsable confirmó en esta tarea que los hitos SEO 1 y 2 ya están desplegados y verificados; esto actualiza las referencias históricas anteriores al hito 2 pendiente. No se accedió a producción en esta tarea.
-
-Implementados un h1 único con visually-hidden, misión como párrafo con clase h5 y texto intacto, títulos de espacios como h3 con clase visual h4 y alt corregidos. Los banners del hero usan alt vacío por su función decorativa. Solo se ajustaron las dos referencias GSAP de h4 a .h4 para mantener la animación; sin cambios visuales intencionales, CSS, SCSS ni imágenes modificados. Suite local: 25 tests OK, manage.py check sin problemas. Pendiente de revisión visual local y deploy autorizado; no se hizo commit ni push.
+Actualizar fecha, fuente y resultados al confirmar cambios; separar mediciones locales de producción. Mantener coherencia con [producción](produccion.md) y usar [historial técnico](historial-tecnico.md) como registro histórico con corte al 07/10/2026. No incluir secretos.
