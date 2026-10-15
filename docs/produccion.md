@@ -1,6 +1,6 @@
 # Producción: arquitectura y operación
 
-**Última actualización documental: 14/10/2026.** Estado productivo actualizado según los hechos confirmados por el responsable al 14/10/2026; los hitos SEO 1–3 están desplegados y verificados. Esta corrección documental no realiza una inspección remota nueva; las métricas de recursos conservan la medición del 07/10/2026. Las rutas registradas son datos operativos, no credenciales; no se incluyen claves, valores privados de settings ni contenido de SQLite.
+**Última actualización documental: 14/10/2026.** Estado productivo actualizado según los hechos confirmados por el responsable al 14/10/2026; los hitos SEO 1–3 están desplegados y verificados. Esta revisión pública no realiza una inspección remota nueva. Se omiten ubicaciones y procedimientos internos del entorno activo; no se incluyen secretos ni contenido de SQLite.
 
 ## Arquitectura actual
 
@@ -14,28 +14,16 @@ Cliente HTTPS → Nginx → socket Unix → Gunicorn (1 worker) → Django → S
 | Elemento | Versión o valor confirmado |
 | --- | --- |
 | Sistema operativo | Ubuntu 22.04.5 LTS |
-| Kernel | 5.15.0-198-generic |
 | Python | 3.10.12 |
 | Django | 5.2.17 LTS |
 | Gunicorn | 23.0.0; 1 worker; ejecución como root |
 | Nginx | 1.18.0 |
 | Base de datos | SQLite; versión de la biblioteca no registrada |
-| Código activo | `/root/casahuesped` |
-| Virtualenv | `/root/myenv52` |
-| Transporte Nginx–Gunicorn | Socket Unix `/root/casahuesped.sock`, usado por ambos |
-| Servicio systemd | `gunicorn.service` |
-| Directorio de trabajo | `WorkingDirectory=/root/casahuesped` |
-| Alias estáticos de Nginx | `/root/casahuesped/static/` y `/root/casahuesped/static_dev/` |
+| Transporte Nginx–Gunicorn | Socket Unix local |
 | Commit activo | `d3f67c5` — «Mejora semantica y accesibilidad SEO», confirmado al 14/10/2026 |
 | Validación pública | Gunicorn activo, HTTPS operativo y robots/sitemap `200`, confirmados al 14/10/2026 |
 
-Comando efectivo de Gunicorn en `gunicorn.service`:
-
-```text
-/root/myenv52/bin/gunicorn --workers 1 --bind unix:/root/casahuesped.sock casahuesped.wsgi:application
-```
-
-El servicio trabaja en `/root/casahuesped`. Nginx usa el mismo socket y los dos alias estáticos registrados en la tabla.
+Gunicorn se ejecuta como servicio del sistema dentro de un entorno Python aislado. Nginx publica los estáticos recolectados y conserva acceso a los assets fuente necesarios para las galerías. Las rutas y órdenes de activación del servidor no se publican aquí.
 
 ## Consolidación de dominio — confirmación del responsable al 12/10/2026
 
@@ -60,14 +48,9 @@ Esta tarea no ejecutó verificaciones remotas ni modificó configuración. No se
 
 ## Recursos y medidas operativas
 
-- RAM medida: 454 MiB totales y 254 MiB disponibles en la medición final.
-- Swap de 1 GiB en `/swapfile`.
-- Disco final: 9,6 GB totales, 6,8 GB usados, 2,8 GB libres, 72 %.
-- Journal con uso final de 184 MB y límite permanente `SystemMaxUse=200M` en `/etc/systemd/journald.conf.d/10-size.conf`.
-- `MODULES=dep` en initramfs.
-- Kernel activo `5.15.0-198-generic`; fallback instalado `5.4.0-216`.
+El despliegue utiliza un servidor de recursos limitados. Se redujo el número de workers, se habilitó swap, se limitó la retención de logs y se liberó espacio de disco para recuperar margen operativo. Estas medidas responden a las mediciones realizadas, no garantizan capacidad futura.
 
-Swap ofrece margen frente a presión de memoria; no sustituye la RAM ni garantiza capacidad adicional de procesamiento. La limitación del journal y la limpieza recuperaron espacio. Las cifras son mediciones finales del 07/10/2026.
+Durante la actualización de Ubuntu se ajustó la generación del initramfs para evitar un tamaño excesivo y se conservó una alternativa de arranque. El incidente se resume en [historial técnico](historial-tecnico.md), sin exponer versiones exactas del kernel ni procedimientos internos de recuperación.
 
 ## Decisiones actuales y razones
 
@@ -77,7 +60,7 @@ Swap ofrece margen frente a presión de memoria; no sustituye la RAM ni garantiz
 | Mantener SQLite | El alcance actual no incluye reservas ni una carga de escritura que justifique otro motor. Debe preservarse y respaldarse la base; revisar esta decisión si cambia el alcance o aparecen límites medidos. |
 | Gunicorn con 1 worker | Se redujo desde 3 por recursos disponibles y tráfico actual. Es un compromiso de memoria y concurrencia; revisar con mediciones si aumenta el tráfico. |
 | Socket Unix | Es el transporte confirmado entre Nginx y Gunicorn en el mismo servidor. Mantener documentados su ruta, propietario y permisos antes de intervenir. |
-| `MODULES=dep` | Reduce los módulos incluidos en initramfs a los identificados como necesarios para el sistema, evitando el tamaño excesivo encontrado durante el upgrade. Si cambia hardware o almacenamiento, revisar los módulos requeridos y el procedimiento de recuperación. |
+| Initramfs ajustado | Incluir los módulos necesarios redujo su tamaño tras el incidente de actualización. Los cambios de plataforma requieren revisar compatibilidad y recuperación. |
 | Entorno Python recreado | Tras actualizar Ubuntu se recrearon entornos para utilizar el Python del sistema actualizado y evitar depender del virtualenv anterior. |
 | Clon limpio de producción | Permite desplegar el historial saneado y conservar por separado los datos y la configuración del entorno. |
 
@@ -92,7 +75,7 @@ Gunicorn como root es una condición existente, **no una decisión recomendada p
 
 «Fuera de Git» no significa necesariamente «fuera del directorio del proyecto». Conservar los settings y la base del entorno; no sustituirlos por el ejemplo o por una base local al desplegar.
 
-`static_dev/` es la entrada versionada de assets. La vista actual descubre las galerías en `STATICFILES_DIRS[0]`; por ello el despliegue conserva esa entrada además de la salida recolectada. Los alias confirmados de Nginx apuntan a `/root/casahuesped/static/` y `/root/casahuesped/static_dev/`. No se deducen aquí prefijos de URL adicionales a partir de las rutas físicas. `collectstatic` no compila SCSS.
+`static_dev/` es la entrada versionada de assets. La vista actual descubre las galerías en `STATICFILES_DIRS[0]`; por ello el despliegue conserva esa entrada además de la salida recolectada. Nginx publica los directorios de estáticos correspondientes; sus rutas internas no forman parte de esta documentación pública. `collectstatic` no compila SCSS.
 
 El conjunto fuente optimizado contiene 70 JPG finales, con una reducción aproximada del 34,8 %. Esta métrica describe el conjunto fuente, no una medición del tiempo de carga de la página.
 
@@ -121,13 +104,11 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 ```
 
-En el entorno activo confirmado, el intérprete es `/root/myenv52/bin/python` y el servicio es `gunicorn.service`; no asumir ese entorno para cualquier candidato. El comando efectivo documentado usa el socket activo: una prueba aislada debe usar otro destino para no interferir con producción. Los agentes no deben ejecutar operaciones de producción por iniciativa propia.
+Las pruebas aisladas deben usar un destino distinto del servicio activo y detenerse al terminar. El procedimiento de activación depende de la configuración privada del entorno. Los agentes no deben ejecutar operaciones de producción por iniciativa propia.
 
 ## Rollback y recuperación
 
-El rollback de aplicación existente es `/root/casahuesped-old-20261007`, una copia de archivos del despliegue anterior. Su `.git` fue eliminado deliberadamente después de verificar el nuevo despliegue; no es un checkout Git para actualizar o revertir mediante comandos de Git. El entorno Django 4.2 de rollback se conserva en `/root/myenv310`.
-
-El kernel fallback instalado es `5.4.0-216`; el activo es `5.15.0-198-generic`. La recuperación con un kernel anterior corresponde al sistema operativo y es distinta del rollback de aplicación.
+Se conserva una copia de aplicación y entorno anteriores como recurso de rollback, además de una alternativa de arranque del sistema. Son mecanismos distintos: revertir el código no restaura SQLite ni deshace automáticamente migraciones o escrituras.
 
 La restauración completa de backups todavía no fue probada. La existencia de una copia de archivos y del entorno anterior no demuestra una recuperación completa de datos. Sigue pendiente la política definitiva de retención/eliminación del rollback y del kernel fallback.
 
@@ -137,7 +118,7 @@ Antes del próximo deploy, completar un procedimiento revisable que identifique:
 - Base y respaldos disponibles; tratamiento de migraciones y escrituras posteriores. Volver a un commit no restaura SQLite.
 - Servicio/socket a activar, estáticos compatibles y comprobaciones de HTTPS y logs.
 - Criterios para volver atrás y responsable de ejecutar la recuperación.
-- Uso del kernel fallback instalado `5.4.0-216` dentro del procedimiento de recuperación del servidor.
+- Alternativa de arranque y procedimiento de recuperación revisados para el entorno, documentados fuera del repositorio público.
 
 No borrar el material de rollback ni kernels de recuperación como parte de una limpieza rutinaria.
 

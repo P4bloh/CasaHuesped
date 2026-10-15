@@ -24,38 +24,28 @@ Se mantuvieron Django Templates y SQLite para el alcance actual. No se añadiero
 
 ## Ubuntu 20.04 → 22.04 e incidente de initramfs
 
-Durante la actualización del servidor desde Ubuntu 20.04 a 22.04 se produjo un kernel panic relacionado con un initramfs demasiado grande en una máquina de 512 MB de RAM.
+Durante la actualización de Ubuntu 20.04 a 22.04 se produjo un kernel panic relacionado con un initramfs demasiado grande para un servidor de memoria limitada.
 
-Durante la recuperación se arrancó temporalmente con el kernel `5.4.0-216`. El initramfs de `5.15.0-198-generic` medía aproximadamente 109 MB con `MODULES=most`; después de configurar `MODULES=dep` y regenerarlo quedó en aproximadamente 50 MB, una reducción cercana al 54 %.
+Se recuperó el arranque usando temporalmente un kernel anterior. Después se ajustó la selección de módulos del initramfs, reduciendo su tamaño aproximadamente un 54 %, y se validó el kernel actualizado mediante un arranque de prueba antes de establecerlo como habitual. Se conservó una alternativa de arranque para recuperación.
 
-Se verificó el kernel `5.15.0-198-generic` primero mediante un arranque de prueba y posteriormente mediante un arranque normal permanente. El estado estable informado es Ubuntu 22.04.5 LTS con ese kernel activo.
-
-El kernel `5.4.0-216` quedó instalado como fallback. La RAM actual medida es de 454 MiB totales y 254 MiB disponibles en la medición final. El dato histórico del servidor de 512 MB y la medición actual son referencias distintas.
+El caso aporta experiencia de diagnóstico y recuperación en Linux. Las versiones de kernel, ubicaciones y pasos específicos del servidor activo no se incluyen en esta versión pública.
 
 ## Recreación de entornos y clon limpio de producción
 
-Tras actualizar el sistema operativo se recrearon entornos Python. La aplicación estable utiliza Python 3.10.12 y el virtualenv `/root/myenv52`.
+Tras actualizar el sistema operativo se recrearon los entornos Python para usar el intérprete compatible con el sistema actualizado.
 
-La migración de producción se hizo mediante un clon limpio del repositorio saneado, conservando `settings.py` y `db.sqlite3` fuera de Git. El código activo está en `/root/casahuesped`.
-
-La copia de archivos del despliegue anterior se conserva en `/root/casahuesped-old-20261007`, junto con el entorno de rollback Django 4.2 en `/root/myenv310`. La carpeta de código anterior perdió deliberadamente su `.git` después de verificar el nuevo despliegue.
+La migración de producción utilizó un clon limpio del repositorio saneado, conservando la configuración privada y SQLite fuera de Git. Se guardó una copia del despliegue y entorno anteriores como recurso de rollback, separado del checkout activo.
 
 Antes de la activación se validaron `check`, tests, migraciones, `collectstatic` y Gunicorn aislado. La comprobación final informada fue una respuesta `200` por HTTPS público. Esta revisión documental no vuelve a ejecutar esas operaciones sobre el servidor.
 
 ## Ajuste de recursos y limpieza
 
-Gunicorn se redujo de 3 a 1 worker por los recursos disponibles y el tráfico actual. `gunicorn.service` usa `WorkingDirectory=/root/casahuesped` y el comando efectivo:
+Gunicorn se redujo de 3 a 1 worker por los recursos disponibles y el tráfico actual. Se mantuvo Nginx como servidor frontal, comunicándose con Gunicorn mediante un socket Unix y sirviendo los archivos estáticos.
 
-```text
-/root/myenv52/bin/gunicorn --workers 1 --bind unix:/root/casahuesped.sock casahuesped.wsgi:application
-```
-
-Nginx usa `/root/casahuesped.sock` y los alias `/root/casahuesped/static/` y `/root/casahuesped/static_dev/`. El entorno cuenta con 1 GiB de swap en `/swapfile`. El límite permanente del journal es `SystemMaxUse=200M`, definido en `/etc/systemd/journald.conf.d/10-size.conf`; su uso final fue de 184 MB.
-
-Se limpiaron archivos y logs para recuperar margen de disco. La medición final del 07/10/2026 es de 9,6 GB totales, 6,8 GB usados, 2,8 GB libres y 72 % de uso.
+Se habilitó swap, se limitó el crecimiento de logs y se limpiaron archivos para recuperar margen de disco. Estos ajustes forman parte del mantenimiento operativo; las rutas internas y parámetros concretos se omiten del repositorio público.
 
 ## Continuidad
 
-Gunicorn todavía ejecuta como root y su dependencia no es reproducible desde requirements. La restauración completa de backups todavía no está probada. Queda definir la política definitiva de retención/eliminación de la copia de rollback y del kernel fallback, cuya existencia y ubicaciones ya están confirmadas.
+Gunicorn todavía ejecuta como root y su dependencia no es reproducible desde requirements. La restauración completa de backups todavía no está probada. Queda definir la política definitiva de retención/eliminación de la copia de rollback y del kernel fallback, cuya existencia fue confirmada; las ubicaciones se mantienen fuera de esta documentación pública.
 
 La siguiente etapa prevista es auditar enlaces, SEO, analítica, UX/slider, accesibilidad y rendimiento. Consultar [estado](estado.md) para el handoff vivo y [producción](produccion.md) para las decisiones y límites operativos.

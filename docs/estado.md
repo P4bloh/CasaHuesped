@@ -2,7 +2,7 @@
 
 **Última actualización: 14/10/2026.**
 
-Fuente del estado productivo: confirmación del responsable al 14/10/2026. Esta tarea actualiza documentación sin acceder al servidor. Las métricas de recursos conservan su fecha de medición del 07/10/2026.
+Fuente del estado productivo: confirmación del responsable al 14/10/2026. Esta tarea prepara documentación pública sin acceder al servidor; el detalle operativo del entorno activo se omite deliberadamente.
 
 ## Cierre Portfolio v1.0
 
@@ -10,7 +10,7 @@ El proyecto entra en fase de cierre Portfolio v1.0 como landing de alojamiento r
 
 ## Estado confirmado en producción
 
-- Rama local revisada: `main`; HEAD y commit desplegado: `d3f67c5` — «Mejora semantica y accesibilidad SEO».
+- Rama de trabajo: `main`; commit desplegado confirmado: `d3f67c5` — «Mejora semantica y accesibilidad SEO». Las revisiones documentales locales posteriores no implican deploy.
 - Python 3.10.12, Django 5.2.17 LTS y SQLite; Ubuntu 22.04.5 LTS, Nginx 1.18.0 y Gunicorn 23.0.0.
 - Gunicorn activo con 1 worker mediante socket Unix; todavía ejecuta como root.
 - HTTPS público operativo; canonical `https://www.casahuesped53.com.ar/`.
@@ -27,39 +27,13 @@ El proyecto entra en fase de cierre Portfolio v1.0 como landing de alojamiento r
 
 Según la verificación confirmada, `manage.py check --deploy` conserva únicamente W004 y W008: Django no configura HSTS ni la redirección HTTP→HTTPS, porque se implementan en Nginx. No son advertencias silenciadas ni ajustes realizados por esta tarea. Ver [producción](produccion.md).
 
-## Rutas operativas confirmadas
+## Infraestructura y continuidad
 
-| Elemento | Valor |
-| --- | --- |
-| Código activo | `/root/casahuesped` |
-| Entorno virtual | `/root/myenv52` |
-| Servicio / directorio de trabajo | `gunicorn.service`; `WorkingDirectory=/root/casahuesped` |
-| Socket de Gunicorn y Nginx | `/root/casahuesped.sock` |
-| Alias estáticos de Nginx | `/root/casahuesped/static/` y `/root/casahuesped/static_dev/` |
+Aplicación alojada en DigitalOcean sobre Ubuntu/Linux. Nginx publica HTTPS y estáticos, y se comunica con un worker de Gunicorn mediante un socket Unix. Django renderiza la landing y utiliza SQLite.
 
-## Servidor y recursos
+Se ajustaron workers, swap y retención de logs para un servidor de recursos limitados. La optimización de imágenes produjo 70 JPG finales y una reducción aproximada del conjunto fuente del 34,8 %.
 
-- RAM medida: 454 MiB totales y 254 MiB disponibles en la medición final.
-- Swap: `/swapfile`, 1 GiB.
-- Disco final: 9,6 GB totales, 6,8 GB usados, 2,8 GB libres, 72 %.
-- Initramfs configurado con `MODULES=dep` tras el incidente de tamaño excesivo.
-- Journal: `SystemMaxUse=200M` en `/etc/systemd/journald.conf.d/10-size.conf`; uso final de 184 MB.
-- Kernel activo: `5.15.0-198-generic`; kernel fallback instalado: `5.4.0-216`.
-- Optimización de imágenes: 70 JPG finales y reducción aproximada del conjunto fuente del 34,8 %.
-
-Comando efectivo de Gunicorn, ejecutado desde `/root/casahuesped` por `gunicorn.service`:
-
-```text
-/root/myenv52/bin/gunicorn --workers 1 --bind unix:/root/casahuesped.sock casahuesped.wsgi:application
-```
-
-La reducción de workers y la limpieza de archivos/logs recuperaron margen operativo. Antes de tomar decisiones nuevas, volver a medir consumo y espacio libre.
-
-## Rollback temporal
-
-El rollback de aplicación está en `/root/casahuesped-old-20261007`: es una copia de archivos del despliegue anterior. Su `.git` se eliminó deliberadamente después de verificar el nuevo despliegue. Se conserva el entorno Django 4.2 en `/root/myenv310`.
-
-El kernel fallback `5.4.0-216` sigue instalado; el activo es `5.15.0-198-generic`. El rollback de aplicación y el kernel fallback son recursos distintos. La restauración completa de backups todavía no está probada y queda definir la política definitiva de retención/eliminación de ambos recursos. Ver [producción](produccion.md).
+Se conserva una versión anterior de aplicación y entorno como estrategia de rollback, además de una alternativa de arranque del sistema. Una copia de código no demuestra que se haya probado una restauración completa de datos. Ubicaciones y procedimientos operativos específicos no se incluyen en esta documentación pública.
 
 ## Pendientes conocidos
 
@@ -73,6 +47,10 @@ Estos pendientes no se resolvieron en el cierre documental. No hay cambios funci
 
 ## Próximo paso y mantenimiento
 
-Revisar y aprobar la documentación de Portfolio v1.0. No hay autorización de commit, push ni deploy. Reservas permanece como posible evolución futura, sin funcionalidad implementada ni compromiso de alcance.
+Revisar y aprobar la documentación pública de Portfolio v1.0. El dueño autorizó el uso público del proyecto como trabajo profesional y de portfolio; los assets del cliente no se ofrecen para reutilización. Ver [atribuciones](../THIRD_PARTY_NOTICES.md). No hay autorización de commit, push ni deploy. Reservas permanece como posible evolución futura, sin funcionalidad implementada ni compromiso de alcance.
 
 Actualizar fecha, fuente y resultados al confirmar cambios; separar mediciones locales de producción. Mantener coherencia con [producción](produccion.md) y usar [historial técnico](historial-tecnico.md) como registro histórico con corte al 07/10/2026. No incluir secretos.
+
+## Alcance de la preparación pública
+
+Se generalizaron los documentos operativos y se añadieron atribuciones de terceros, sin cambios de código ni infraestructura. La licencia abierta del código propio no se decidió; los derechos de terceros y del cliente están separados. Esta edición no reescribe el historial: las versiones anteriores conservan el detalle operativo previamente auditado.

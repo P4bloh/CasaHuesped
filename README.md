@@ -120,6 +120,10 @@ El ejemplo usa hosts locales y `DEBUG` activado por defecto. Lee `SECRET_KEY` y 
 - [Historial técnico](docs/historial-tecnico.md): evolución e incidentes, con corte histórico al 07/10/2026.
 - [AGENTS.md](AGENTS.md): instrucciones y límites para agentes.
 
+## Propiedad y licencias
+
+El código propio se presenta como trabajo profesional y de portfolio, sin conceder una licencia abierta de reutilización en esta entrega. La marca, textos, fotografías, logos y demás assets del cliente se utilizan con autorización para el proyecto y portfolio; no se otorgan derechos de reutilización a terceros. Bootstrap, jQuery y las demás librerías conservan sus propias licencias. Ver [propiedad y atribuciones de terceros](THIRD_PARTY_NOTICES.md).
+
 ## Uso de IA
 
 Codex se utilizó como agente de apoyo en tareas delimitadas de revisión, implementación, pruebas y documentación. Los cambios tuvieron revisión manual, validaciones y aprobación del responsable antes de commits y despliegues. La responsabilidad sobre el alcance y la aceptación del resultado se mantuvo en la persona a cargo del proyecto.
